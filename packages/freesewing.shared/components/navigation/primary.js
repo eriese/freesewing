@@ -94,7 +94,7 @@ const SubLevel = ({ nodes={}, active }) => (
               hover:cursor-row-resize
               items-center
             `}>
-              <Link href={`${child.__slug}`}>
+              <Link href={`/${child.__slug}`}>
                 <a title={child.__title} className={`
                   grow pl-2 border-l-2
                   ${linkClasses}
@@ -127,7 +127,7 @@ const SubLevel = ({ nodes={}, active }) => (
         </li>
       ) : (
         <li className='pl-2 flex flex-row items-center' key={child.__slug}>
-          <Link href={`${child.__slug}`} title={child.__title}>
+          <Link href={`/${child.__slug}`} title={child.__title}>
             <a className={`
               pl-2 border-l-2
               grow
@@ -172,7 +172,7 @@ const TopLevel = ({ icon, title, nav, current, slug, hasChildren=false, active }
       items-center
     `}>
       <span className="text-secondary">{icon}</span>
-      <Link href={`${slug}`}>
+      <Link href={`/${slug}`}>
         <a className={`
           grow ${linkClasses} hover:cursor-pointer
           ${slug === active
@@ -215,15 +215,16 @@ export const Icons = ({
   liClasses='',
   linkClasses=`grow text-lg lg:text-xl py-1 text-base-content sm:text-base-content
   hover:text-secondary sm:hover:text-secondary hover:cursor-pointer
-  flex flex-col items-center`
+  flex flex-col items-center`,
+  linkStyle={}
 }) => {
   if (!app.navigation) return null
   const output = []
   for (const page of order(app.navigation)) {
     output.push(
       <li key={page.__slug} className={liClasses}>
-        <Link href={`${page.__slug}`}>
-          <a className={linkClasses} title={page.__title}>
+        <Link href={`/${page.__slug}`}>
+          <a className={linkClasses} title={page.__title} style={linkStyle}>
             {icons[page.__slug]
               ? icons[page.__slug]('w-14 h-14')
               : <HelpIcon />
