@@ -23,6 +23,7 @@ export default {
       const defaults = {
         scale: 1,
         rotation: 0,
+        lines: []
       }
       so = { ...defaults, ...so }
       so.scale = so.scale * this.context.settings.scale
@@ -35,28 +36,51 @@ export default {
         .attr('data-text', so.nr, overwrite)
         .attr('data-text-class', 'text-4xl fill-note font-bold')
         .attr('data-text-transform', transform(so.at))
-      let shift = 8
-      if (so.title) {
-        this.points[`_${prefix}_titleName`] = so.at
-          .shift(-90 - so.rotation, shift * so.scale)
-          .attr('data-text', so.title)
-          .attr('data-text-class', 'text-lg fill-current font-bold')
-          .attr('data-text-transform', transform(so.at.shift(-90 - so.rotation, 13 * so.scale)))
-        shift += 8
+      let shift = 0;
+      const shiftAngle = -90 - so.rotation;
+      const addShiftedLine = (pointName, text, className, transformSize) => {
+        shift += 8;
+        this.points[`_${prefix}_${pointName}`] = so.at
+          .shift(shiftAngle, shift * so.scale)
+          .attr('data-text', text)
+          .attr('data-text-class', className)
+          .attr('data-text-transform', transform(so.at.shift(shiftAngle, transformSize * so.scale)));
+
+        return this.points[`_${prefix}_${pointName}`]
       }
-      this.points[`_${prefix}_titlePattern`] = so.at
-        .shift(-90 - so.rotation, shift * so.scale)
-        .attr('data-text', this.context.config.name)
-        .attr('data-text', 'v' + this.context.config.version)
-        .attr('data-text-class', 'fill-note')
-        .attr('data-text-transform', transform(so.at.shift(-90 - so.rotation, shift * so.scale)))
+      if (so.title) {
+        addShiftedLine('titleName', so.title, 'text-lg fill-current font-bold', 13)
+        // this.points[`_${prefix}_titleName`] = so.at
+        //   .shift(shiftAngle, shift * so.scale)
+        //   .attr('data-text', so.title)
+        //   .attr('data-text-class', 'text-lg fill-current font-bold')
+        //   .attr('data-text-transform', transform(so.at.shift(shiftAngle, 13 * so.scale)))
+        // shift += 8
+      }
+      addShiftedLine('titlePattern', `${this.context.config.name} v${this.context.config.version}`, 'fill-note', shift);
+      // this.points[`_${prefix}_titlePattern`] = so.at
+      //   .shift(shiftAngle, shift * so.scale)
+      //   .attr('data-text', this.context.config.name)
+      //   .attr('data-text', 'v' + this.context.config.version)
+      //   .attr('data-text-class', 'fill-note')
+      //   .attr('data-text-transform', transform(so.at.shift(shiftAngle, shift * so.scale)))
       if (this.context.settings.metadata && this.context.settings.metadata.for) {
-        shift += 8
-        this.points[`_${prefix}_titleFor`] = so.at
-          .shift(-90 - so.rotation, shift * so.scale)
-          .attr('data-text', '( ' + this.context.settings.metadata.for + ' )')
-          .attr('data-text-class', 'fill-current font-bold')
-          .attr('data-text-transform', transform(so.at.shift(-90 - so.rotation, shift * so.scale)))
+        addShiftedLine('titleFor', `( ${this.context.settings.metadata.for} )`, 'fill-current font-bold', shift);
+        // shift += 8
+        // this.points[`_${prefix}_titleFor`] = so.at
+        //   .shift(shiftAngle, shift * so.scale)
+        //   .attr('data-text', '( ' + this.context.settings.metadata.for + ' )')
+        //   .attr('data-text-class', 'fill-current font-bold')
+        //   .attr('data-text-transform', transform(so.at.shift(shiftAngle, shift * so.scale)))
+      }
+      if (so.lines?.length) {
+        for (var i = 0; i < so.lines.length; i++) {
+          const line = so.lines[i];
+          addShiftedLine(`titleLine${i}`, line, 'fill-current', shift)
+          // shift += 8;
+          // this.points[`_${prefix}_titleLine${i}`] = so.at
+          //   .shift(shiftAngle, shift * so.scale)
+        }
       }
     },
   },
