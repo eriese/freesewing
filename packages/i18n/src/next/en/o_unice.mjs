@@ -8,7 +8,7 @@ const o_unice = {
   "fabricStretchY.t": "Fabric stretch (vertical)",
   "fabricStretchY.d": "Adjust this for more or less stretchy fabrics",
   "adjustStretch.t": "Adjust stretch",
-  "adjustStretch.d": "This option you to put in the maximum stretch that the fabric will allow in both horizontal and vertical directions; When disabled, the stretch values are used as-is",
+  "adjustStretch.d": "This option allows you to put in the maximum stretch that the fabric will allow in both horizontal and vertical directions; When disabled, the stretch values are used as-is",
   "useCrossSeam.t": "Use crossseam",
   "useCrossSeam.d": "When enabled, the total height of the pattern pieces combined will match the cross seam length minus the front and back rise. When disabled, the total height depends on the gusset length option."
 }

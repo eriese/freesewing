@@ -14,6 +14,21 @@ export default {
   },
   macros: {
     title: function (so) {
+      let prefix = ''
+      if (so.prefix) prefix = so.prefix
+
+      // Passing `false` will remove the title
+      if (so === false) {
+        for (const id of [
+          `_${prefix}_titleNr`,
+          `_${prefix}_titleName`,
+          `_${prefix}_titlePattern`,
+          `_${prefix}_titleFor`,
+        ])
+          delete this.points[id]
+        return true
+      }
+
       const transform = function (anchor) {
         const cx = anchor.x - so.scale * anchor.x
         const cy = anchor.y - so.scale * anchor.y
@@ -28,8 +43,6 @@ export default {
       so.scale = so.scale * this.context.settings.scale
       let overwrite = true
       if (so.append) overwrite = false
-      let prefix = ''
-      if (so.prefix) prefix = so.prefix
       this.points[`_${prefix}_titleNr`] = so.at
         .clone()
         .attr('data-text', so.nr, overwrite)
