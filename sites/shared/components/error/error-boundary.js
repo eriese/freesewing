@@ -1,20 +1,29 @@
 import React from 'react';
 import ResetButtons from './reset-buttons'
+import {EventGroup} from 'shared/components/workbench/events'
+
+const ErrorView = (props) => {
+  return (<div>
+      {props.children  || (<h2>Something went wrong.</h2>)}
+      <EventGroup type="error" events={[props.error]} units={props.gist.units}></EventGroup>
+      <ResetButtons undoGist={props.undoGist} resetGist={props.resetGist} />
+    </div>)
+}
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error) {
     // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
-    console.log(error, errorInfo);
+    console.log('hit the boundary');
   }
 
   componentDidUpdate(prevProps) {
@@ -24,19 +33,17 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
+
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return (<div>
-        {this.props.errorView  || (<h1>Something went wrong.</h1>)}
-        <ResetButtons undoGist={this.props.undoGist} resetGist={this.props.resetGist} />
-      </div>)
-      return ;
+      return <ErrorView {...this.props} error={this.state.error}>{this.errorView}</ErrorView>
+      // return <h1>FIXME</h1>
     }
 
     try {
       return this.props.children;
     } catch(e) {
-      return this.props.errorView  || (<h1>Something went wrong.</h1>);
+      return <ErrorView {...props} error={e}>this.errorView</ErrorView>;
     }
   }
 }

@@ -1,10 +1,10 @@
 import Markdown from 'react-markdown'
 import { formatMm } from 'shared/utils'
 
-const Error = ({err}) => (
-  <code className="block">
-    {err.toString()}
-  </code>
+export const Error = ({err}) => (
+  <pre>
+    {err.stack.split(/\n/g).slice(0, 5).map((l, i) => (<code key={`error-${i}`} className="block">{l}</code>))}
+  </pre>
 )
 
 // Markdown wrapper to suppress creation of P tags
@@ -15,16 +15,16 @@ const Event = ({ evt, units }) => {
     if (evt[1]?.mm) return <span dangerouslySetInnerHTML={{
       __html: `${evt[0]}: <strong>${formatMm(evt[1].mm, units, 'html')}</strong>`
     }}/>
-    else return evt.map(e => <Event evt={e} key={e} />)
+    else return evt.map((e,i) => <Event evt={e} key={e} />)
   }
 
-  else if (evt.message) return <Error err={evt} />
-  else if (typeof evt === 'string') return <Md>{evt}</Md>
+  else if (evt.message) return <Error err={evt} key={evt}/>
+  else if (typeof evt === 'string') return <Md key={evt}>{evt}</Md>
 
-  return <Md>Note a recognized event: {JSON.stringify(evt, null ,2)}</Md>
+  return <Md key={evt}>Note a recognized event: {JSON.stringify(evt, null ,2)}</Md>
 }
 
-const EventGroup = ({ type='info', events=[], units='metric' }) => events.length > 0 ? (
+export const EventGroup = ({ type='info', events=[], units='metric' }) => events.length > 0 ? (
   <div className="">
     <h3 className="capitalize" id={`events-${type}`}>{type}</h3>
     <table className="table w-full mdx">
@@ -71,7 +71,7 @@ const Events = props => props?.draft?.events
             )
           )}
         </ul>
-        {order.map(type => <EventGroup type={type} events={props.draft.events[type]} units={props.gist.units}/>)}
+        {order.map(type => <EventGroup type={type} events={props.draft.events[type]} units={props.gist.units} key={`events-${type}`}/>)}
       </div>
     </div>
   ) : null
