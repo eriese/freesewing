@@ -1,13 +1,21 @@
 import React from 'react';
 import ResetButtons from './reset-buttons'
 import {EventGroup} from 'shared/components/workbench/events'
+import DefaultErrorView from './view';
 
 const ErrorView = (props) => {
-  return (<div>
-      {props.children  || (<h2>Something went wrong.</h2>)}
-      <EventGroup type="error" events={[props.error]} units={props.gist.units}></EventGroup>
-      <ResetButtons undoGist={props.undoGist} resetGist={props.resetGist} />
-    </div>)
+  if (props.children) return props.children
+
+  const inspectChildrenProps = {
+    type: 'error',
+    events: [props.error],
+    units: props.gist?.units
+  }
+  const inspectChildren = (<EventGroup {...inspectChildrenProps}></EventGroup>)
+  return (props.children  || (<DefaultErrorView inspectChildren={inspectChildren}>
+        <h4>If you think your last action caused this error, you can: </h4>
+        <ResetButtons undoGist={props.undoGist} resetGist={props.resetGist} />
+      </DefaultErrorView>))
 }
 
 class ErrorBoundary extends React.Component {
@@ -37,13 +45,12 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return <ErrorView {...this.props} error={this.state.error}>{this.errorView}</ErrorView>
-      // return <h1>FIXME</h1>
     }
 
     try {
       return this.props.children;
     } catch(e) {
-      return <ErrorView {...props} error={e}>this.errorView</ErrorView>;
+      return <ErrorView {...this.props} error={e}>{this.errorView}</ErrorView>;
     }
   }
 }
