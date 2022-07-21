@@ -69,10 +69,12 @@ export default MdxPage
  */
 export async function getStaticProps({ params, locale }) {
 
+  // #FIXME I think we need jargon?
   const { mdx, intro, toc, frontmatter } = await mdxLoader(
     locale,
     'org',
-    ['docs', ...params.mdxslug].join('/')
+    ['docs', ...params.mdxslug].join('/'),
+    {}
   )
   const { title='FIXME: Please give this page a title' } = frontmatter
 

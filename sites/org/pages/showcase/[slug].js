@@ -7,7 +7,7 @@ import PageLink from 'shared/components/page-link.js'
 import Lightbox from 'shared/components/lightbox.js'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { strapiHost } from 'shared/config/freesewing.mjs'
-import { strapiImage } from 'shared/utils.js'
+import { strapiImage } from 'shared/utils'
 import { useTranslation } from 'next-i18next'
 
 const Maker = ({ maker }) => {

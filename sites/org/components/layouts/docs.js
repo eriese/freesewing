@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Aside from 'shared/components/navigation/aside'
 import ThemePicker from 'shared/components/theme-picker'
 import Breadcrumbs from 'shared/components/breadcrumbs.js'
-import { getCrumbs } from 'shared/utils.js'
+import { getCrumbs } from 'shared/utils'
 
 const DefaultLayout = ({ app, title=false, crumbs=false, children=[] }) => {
   const router = useRouter()

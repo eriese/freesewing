@@ -8,7 +8,7 @@ import Lightbox from 'shared/components/lightbox.js'
 import ImageWrapper from 'shared/components/wrappers/img.js'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { strapiHost } from 'shared/config/freesewing.mjs'
-import { strapiImage } from 'shared/utils.js'
+import { strapiImage } from 'shared/utils'
 
 const Author = ({ author }) => (
   <div id="author" className="flex flex-col lg:flex-row m-auto p-2 items-center">

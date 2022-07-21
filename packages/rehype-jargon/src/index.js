@@ -16,7 +16,7 @@ export default (options) => {
   const isJargon = (node) => {
     if (
       node.tagName === 'em' &&
-      Object.keys(options.jargon).indexOf(node.children[0].value.toLowerCase()) !== -1
+      Object.keys(options.jargon).indexOf(node.children[0].value?.toLowerCase()) !== -1
     ) return true
     return false
   }
@@ -27,7 +27,7 @@ export default (options) => {
       const termTree = fromHtml(
         options.transform(
           node.children[0].value,
-          options.jargon[node.children[0].value.toLowerCase()]
+          options.jargon[node.children[0].value?.toLowerCase()]
         ),
         { fragment: true }
       )

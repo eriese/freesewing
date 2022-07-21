@@ -2,9 +2,9 @@ import Page from 'site/components/wrappers/page.js'
 import useApp from 'site/hooks/useApp.js'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { strapiHost } from 'shared/config/freesewing.mjs'
-import { strapiImage } from 'shared/utils.js'
+import { strapiImage } from 'shared/utils'
 import { useTranslation } from 'next-i18next'
-import designs from 'shared/config/designs.json'
+import designs from 'config/software/designs.json'
 import { PreviewTile } from '../index.js'
 
 const DesignIndexPage = (props) => {
@@ -101,11 +101,10 @@ export async function getStaticProps({ params, locale }) {
 }
 
 export const getStaticPaths = async () => {
-
   const paths = [
-    ...designs.accessories,
-    ...designs.blocks,
-    ...designs.garments
+    ...Object.keys(designs.accessories),
+    ...Object.keys(designs.blocks),
+    ...Object.keys(designs.garments)
   ].map( design => ({ params: { design } }))
 
   return {

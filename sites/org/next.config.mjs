@@ -21,6 +21,7 @@ const config = {
     config.resolve.alias.shared = path.resolve('../shared/')
     config.resolve.alias.site = path.resolve(`.`)
     config.resolve.alias.pkgs = path.resolve(`../../packages/`)
+    config.resolve.alias.config = path.resolve('../../config/')
 
     // Suppress warnings about importing version from package.json
     // We'll deal with it in v3 of FreeSewing

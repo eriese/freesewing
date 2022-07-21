@@ -24,8 +24,8 @@ import remarkRehype from 'remark-rehype'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeStringify from 'rehype-stringify'
 import yaml from 'yaml'
-import { getPosts } from '../../freesewing.shared/prebuild/strapi.mjs'
-import { getMdxFileList } from '../../freesewing.shared/prebuild/mdx.mjs'
+import { getPosts } from '../../shared/prebuild/strapi.mjs'
+import { getMdxFileList } from '../../shared/prebuild/mdx.mjs'
 dotenv.config()
 
 /*
