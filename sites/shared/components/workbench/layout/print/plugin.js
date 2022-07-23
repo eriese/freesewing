@@ -73,6 +73,14 @@ const basePlugin = ({sheetWidth, sheetHeight, orientation='portrait', boundary=f
             .close()
             .attr('class', 'fill-fabric')
             .attr('style', `stroke-opacity: 0; fill-opacity: ${(col+row)%2===0 ? 0.03 : 0.09};`)
+
+          if (!responsiveWidth) {
+            paths[`_pages__row${row}-col${col}_edge`] = new Path()
+              .move(points[`_pages__row${row}-col${col}-tr`])
+              .line(points[`_pages__row${row}-col${col}-br`])
+              .attr('class', 'stroke-note')
+              .attr('style', 'stroke-width: calc(var(--pattern-stroke) * var(--pattern-scale) * 3)')
+          }
           x += w
         }
         y += h
