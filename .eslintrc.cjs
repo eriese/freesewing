@@ -23,7 +23,7 @@ const frontendFiles = [
 ]
 
 module.exports = {
-  extends: 'eslint:recommended',
+  extends: ['eslint:recommended'],
   env: {
     es2021: true,
   },
@@ -60,10 +60,13 @@ module.exports = {
     {
       files: frontendFiles,
       excludedFiles: nodeFiles,
-      extends: ['next/core-web-vitals'],
+      extends: ['next/core-web-vitals', 'next'],
       env: {
         // We can be stricter than 'next/core-web-vitals' is
         node: false,
+      },
+      rules: {
+        '@next/next/no-img-element': 'off',
       },
     },
     {
