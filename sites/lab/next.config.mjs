@@ -1,16 +1,15 @@
 import path from 'path'
-import i18nConfig from './next-i18next.config.js'
+import i18n from './next-i18next.config.js'
 import { designs } from './prebuild/designs.mjs'
 import { plugins } from './prebuild/plugins.mjs'
 import { banner } from '../../scripts/banner.mjs'
 
 let greeting = false
-
 const config = {
   experimental: {
     externalDir: true,
   },
-  i18n: i18nConfig.i18n,
+  ...i18n,
   pageExtensions: ['js', 'mjs'],
   webpack: (config) => {
     // JSON support

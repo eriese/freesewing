@@ -20,7 +20,7 @@ const PageWrapper = ({
   const router = useRouter()
   const slug = router.asPath.slice(1)
 
-  useEffect(() => app.setSlug(slug), [slug])
+  useEffect(() => app.setSlug(slug), [slug, app])
 
   const childProps = {
     app: app,

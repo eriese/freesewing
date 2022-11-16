@@ -1,13 +1,4 @@
 // See: https://github.com/isaachinman/next-i18next
-module.exports = {
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-    defaultNS: 'common',
-  },
-  interpolation: {
-    prefix: '{',
-    suffix: '}',
-  },
-  localeStructure: '{lng}/{ns}',
-}
+const i18nConfig = require('../shared/config/i18n.config.js')
+
+module.exports = i18nConfig(['en'])

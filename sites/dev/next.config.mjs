@@ -3,8 +3,7 @@ import i18nConfig from './next-i18next.config.js'
 import { banner } from '../../scripts/banner.mjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
 
-let config = configBuilder('dev')
-config.i18n = i18nConfig.i18n
+let config = { ...configBuilder('dev'), ...i18nConfig }
 
 // Say hi
 console.log(banner + '\n')
