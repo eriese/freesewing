@@ -204,7 +204,6 @@ const Navigation = ({ app, active, className='' }) => {
 */
 export const Icons = ({
   app,
-  active,
   ulClasses = '',
   liClasses = '',
   linkClasses = `grow text-lg lg:text-xl py-1 text-base-content sm:text-base-content
@@ -216,7 +215,7 @@ export const Icons = ({
   const output = []
   for (const page of order(app.navigation)) {
     output.push(
-      <li key={page.__slug}>
+      <li key={page.__slug} className={liClasses}>
         <Link href={`${page.__slug}`}>
           <a className={linkClasses} title={page.__title} style={linkStyle}>
             {icons[page.__slug] ? icons[page.__slug]('w-14 h-14') : <HelpIcon />}
@@ -242,7 +241,6 @@ const PrimaryMenu = ({ app, active, before=[], after=[] }) => (
 export const MainSections = ({ app, active }) => {
   if (!app.navigation) return null
   const output = []
-  let last
   for (const page of order(app.navigation)) {
     const act = isActive(page.__slug, active)
     const txt = (
