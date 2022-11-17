@@ -3,7 +3,6 @@ _types:
     peer:
       '@freesewing/core': &freesewing '^{{version}}'
       '@freesewing/plugin-bundle': *freesewing
-      '@freesewing/config-helpers': *freesewing
     dev:
       'mocha': &mocha '^10.0.0'
       'chai': &chai '^4.2.0'
