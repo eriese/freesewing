@@ -50,17 +50,18 @@ charlie:
     '@freesewing/plugin-bartack': *freesewing
     '@freesewing/plugin-mirror': *freesewing
     '@freesewing/titan': *freesewing
+    '@freesewing/snapseries': *freesewing
 core:
   _:
     'bezier-js': '^6.1.0'
     'bin-pack': '^1.0.2'
-    'hooks': '^0.3.2'
     'lodash.get': '^4.4.2'
     'lodash.set': '^4.3.2'
     'lodash.unset': '^4.5.2'
   dev:
     'eslint': '^8.23.1'
-    'nyc': '^15.1.0'
+    'c8': '^7.12.0'
+    'chai-string': '^1.5.0'
 diana:
   peer:
     '@freesewing/brian': *freesewing
@@ -111,19 +112,7 @@ legend:
 paco:
   peer:
     '@freesewing/titan': *freesewing
-plugin-bundle:
-  dev:
-    '@freesewing/plugin-banner': *freesewing
-    '@freesewing/plugin-buttons': *freesewing
-    '@freesewing/plugin-cutonfold': *freesewing
-    '@freesewing/plugin-dimension': *freesewing
-    '@freesewing/plugin-grainline': *freesewing
-    '@freesewing/plugin-logo': *freesewing
-    '@freesewing/plugin-mirror': *freesewing
-    '@freesewing/plugin-title': *freesewing
-    '@freesewing/plugin-scalebox': *freesewing
-    '@freesewing/plugin-round': *freesewing
-    '@freesewing/plugin-sprinkle': *freesewing
+    '@freesewing/snapseries': *freesewing
 plugintest:
   peer:
     '@freesewing/plugin-banner': *freesewing
@@ -154,6 +143,13 @@ rehype-jargon:
 rehype-highlight-lines:
   _:
     'unist-util-remove': '^3.1.0'
+    'unist-util-visit': '^4.1.0'
+sandy:
+  peer:
+    '@freesewing/snapseries': *freesewing
+shin:
+  peer:
+    '@freesewing/snapseries': *freesewing
 simon:
   peer:
     '@freesewing/brian': *freesewing
@@ -176,6 +172,12 @@ teagan:
   peer:
     '@freesewing/brian': *freesewing
     '@freesewing/plugin-bust': *freesewing
+titan:
+  peer:
+    '@freesewing/snapseries': *freesewing
+trayvon:
+  peer:
+    '@freesewing/snapseries': *freesewing
 wahid:
   peer:
     '@freesewing/brian': *freesewing
