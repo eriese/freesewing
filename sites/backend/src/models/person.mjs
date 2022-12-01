@@ -19,7 +19,12 @@ PersonModel.prototype.guardedCreate = async function ({ body, user }) {
 
   // Prepare data
   const data = { name: body.name }
+  // Name (will be encrypted, so always set _some_ value)
+  if (typeof body.name === 'string') data.name = body.name
+  else data.name = '--'
+  // Notes (will be encrypted, so always set _some_ value)
   if (body.notes || typeof body.notes === 'string') data.notes = body.notes
+  else data.notes = '--'
   if (body.public === true) data.public = true
   if (body.measies) data.measies = this.sanitizeMeasurements(body.measies)
   data.imperial = body.imperial === true ? true : false
