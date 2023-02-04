@@ -3800,10 +3800,10 @@
     hey-listen "^1.0.8"
     tslib "^2.3.1"
 
-"@next/bundle-analyzer@13.1.3":
-  version "13.1.3"
-  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.1.3.tgz#f0e82bdcf17126907a58a68f85d49a71cadb6b07"
-  integrity sha512-3C9NVjV0RRwceejYuwc9yVtBGRyKZaQIAgjLnLPydg1rDO/cNNgmRaq5n+S8Wcsw+YhcDiTWtn1kTX+bbBZYOw==
+"@next/bundle-analyzer@13.1.5":
+  version "13.1.5"
+  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.1.5.tgz#c580bce87e95aaf96e0c61040475781bf93f7b35"
+  integrity sha512-Z+1gyS0Hy+Lpt2k/067YIxmYoKQt0RtHy3EMyR3SMZyZGmx3muZPUBS0Aj+tdfdReVNOK2nQdT8ghSZG9Lwmbw==
   dependencies:
     webpack-bundle-analyzer "4.7.0"
 
@@ -14920,10 +14920,10 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-ora@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ora/-/ora-6.1.0.tgz#86aa07058c4e9fb91444412d103b0d7e01aca973"
-  integrity sha512-CxEP6845hLK+NHFWZ+LplGO4zfw4QSfxTlqMfvlJ988GoiUeZDMzCvqsZkFHv69sPICmJH1MDxZoQFOKXerAVw==
+ora@6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/ora/-/ora-6.1.2.tgz#7b3c1356b42fd90fb1dad043d5dbe649388a0bf5"
+  integrity sha512-EJQ3NiP5Xo94wJXIzAyOtSb0QEIAUu7m8t6UZ9krbz0vAJqr92JpcK/lEXg91q6B9pEGqrykkd2EQplnifDSBw==
   dependencies:
     bl "^5.0.0"
     chalk "^5.0.0"
