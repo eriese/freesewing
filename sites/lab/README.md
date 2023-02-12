@@ -48,7 +48,7 @@
 
 # @freesewing/freesewing.lab
 
-FreeSewing website to test various patterns
+FreeSewing website to test various patterns easily
 
 
 
