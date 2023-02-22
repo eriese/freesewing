@@ -25,7 +25,7 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@headlessui/react": "1.7.7",
+    "@headlessui/react": "1.7.11",
     "@mdx-js/loader": "2.2.1",
     "@mdx-js/mdx": "2.2.1",
     "@mdx-js/react": "2.2.1",
