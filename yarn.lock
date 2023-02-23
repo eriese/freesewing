@@ -7763,10 +7763,10 @@ d3-selection@3, d3-selection@3.0.0:
   resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-3.0.0.tgz#c25338207efa72cc5b9bd1458a1a41901f1e1b31"
   integrity sha512-fmTRWbNMmsmWq6xJV8D19U/gw/bwrHfNXxrIN+HfZgnzqTHp9jOmKMhsTUjXOJnZOdZY9Q28y4yebKzqDKlxlQ==
 
-daisyui@2.47.0:
-  version "2.47.0"
-  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-2.47.0.tgz#f3a8dad0838fc5cbd125910694fa2de0d34441bd"
-  integrity sha512-svZpXKldtHjXTEdj/lu2n7b+EQJSatqvmVB59k4dhCDOYUhUZ3jtGuPrgOJlPysHhDjxjCRWWug/fgV5e8tc/w==
+daisyui@2.51.0:
+  version "2.51.0"
+  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-2.51.0.tgz#7ed95786a27a4ea044f14dc6b1423f98acb213bc"
+  integrity sha512-HGM89+VzZ/KDsH4cK6OhizIscXOVzkEENynovL6bXPfJDOKZQz0V2CuTGEoQmN8FeuGxrZiz/He1P9p+E9Qr5A==
   dependencies:
     color "^4.2"
     css-selector-tokenizer "^0.8.0"
