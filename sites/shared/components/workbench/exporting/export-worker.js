@@ -3,7 +3,7 @@
  * */
 import yaml from 'js-yaml'
 import axios from 'axios'
-import { PdfMaker } from './pdf-maker'
+import { PdfMaker } from './pdf-maker.mjs'
 
 /** when the worker receives data from the page, do the appropriate export */
 addEventListener('message', async (e) => {
