@@ -3803,10 +3803,10 @@
     get-random-values-esm "^1.0.0"
     lodash "^4.17.21"
 
-"@sanity/cli@3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.6.0.tgz#1267735c075756f2743a7d5a41a56e4c6faff553"
-  integrity sha512-s9R57PnnQ9GN8zY0ySBvZGnw8pt4yFfy0Cym3fn2TDyQnvBzmqTGVV/1FiFQYV/u3DyWfmxtv73JHK6xYLBORw==
+"@sanity/cli@3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.7.0.tgz#4b22d53cefbc1f173629aa833dc874295c2a4b4b"
+  integrity sha512-C+rRy3l2ggjfCxvVXz8BvUIM0MT9Obv9z903DeEPrGSETFEwuMpVXhh3rTXg6/69hN47rfIvOlLn7B7TzDCrrA==
   dependencies:
     "@babel/traverse" "^7.19.0"
     chalk "^4.1.2"
@@ -3815,10 +3815,10 @@
     get-it "^8.0.9"
     pkg-dir "^5.0.0"
 
-"@sanity/cli@3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.7.0.tgz#4b22d53cefbc1f173629aa833dc874295c2a4b4b"
-  integrity sha512-C+rRy3l2ggjfCxvVXz8BvUIM0MT9Obv9z903DeEPrGSETFEwuMpVXhh3rTXg6/69hN47rfIvOlLn7B7TzDCrrA==
+"@sanity/cli@3.8.3":
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.8.3.tgz#bfc6b147d8ee589a740e9970dc1e7a8bddf22b67"
+  integrity sha512-peurP4aRRgGWH7jVCrLCg4SlRTzXqASIxaBcegLQ69bSX7EMMkVPqckgvHr5cF6rzwfcSLV4jiQO3K/YvEZVcQ==
   dependencies:
     "@babel/traverse" "^7.19.0"
     chalk "^4.1.2"
