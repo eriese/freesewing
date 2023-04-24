@@ -8,8 +8,10 @@ import { Breadcrumbs } from 'shared/components/breadcrumbs.mjs'
 import { getCrumbs } from 'shared/utils.mjs'
 import { HomeIcon } from 'shared/components/icons.mjs'
 import { useState, useEffect } from 'react'
+import { useApp } from 'shared/hooks/app-context.mjs'
 
-export const DocsLayout = ({ app, title = false, crumbs = false, children = [] }) => {
+export const DocsLayout = ({ title = false, crumbs = false, children = [] }) => {
+  const app = useApp()
   const router = useRouter()
   const [slug, setSlug] = useState('')
   const [breadcrumbs, setBreadcrumbs] = useState(crumbs)

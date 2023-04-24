@@ -7,31 +7,40 @@ import { Tab, Tabs } from './tabs.mjs'
 import { TabbedExample as Example } from './tabbed-example.mjs'
 import { HttpMethod, HttpStatusCode } from './http.mjs'
 
-const Fixme = () => <p>FIXME</p>
+const FIXME = <p>FIXME</p>
+const Comment = (props) => <Popout {...props} comment />
+const Fixme = (props) => <Popout {...props} fixme />
+const Link = (props) => <Popout {...props} link />
+const Note = (props) => <Popout {...props} note />
+const Related = (props) => <Popout {...props} related />
+const Tip = (props) => <Popout {...props} tip />
+const Warning = (props) => <Popout {...props} warning />
+const pre = (props) => <Highlight {...props} />
+const table = (props) => (
+  <table {...props} className="mdx-table table-auto w-full">
+    {props.children}
+  </table>
+)
 
-export const MdxComponents = (app = false) => ({
+export const MdxComponents = {
   // Custom components
   Method: HttpMethod,
   StatusCode: HttpStatusCode,
-  Comment: (props) => <Popout {...props} comment />,
-  Fixme: (props) => <Popout {...props} fixme />,
-  Link: (props) => <Popout {...props} link />,
-  Note: (props) => <Popout {...props} note />,
-  ReadMore: (props) => <ReadMore {...props} app={app} slug={app.slug} />,
-  Related: (props) => <Popout {...props} related />,
-  Tip: (props) => <Popout {...props} tip />,
-  Warning: (props) => <Popout {...props} warning />,
+  Comment,
+  Fixme,
+  Link,
+  Note,
+  ReadMore,
+  Related,
+  Tip,
+  Warning,
   YouTube,
-  pre: (props) => <Highlight {...props} />,
+  pre,
   img: Figure,
-  table: (props) => (
-    <table {...props} className="mdx-table table-auto w-full">
-      {props.children}
-    </table>
-  ),
+  table,
   Tab,
   Tabs,
-  Example: (props) => <Example {...props} app={app} />,
-  PatternDocs: Fixme,
-  PatternOptions: Fixme,
-})
+  Example,
+  PatternDocs: FIXME,
+  PatternOptions: FIXME,
+}

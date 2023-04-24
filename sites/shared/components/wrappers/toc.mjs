@@ -9,6 +9,8 @@ import { useState, useEffect, Fragment } from 'react'
 import { run } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime'
 
+const components = {}
+
 export const TocWrapper = ({ toc }) => {
   const [mdxModule, setMdxModule] = useState()
 
@@ -34,7 +36,7 @@ export const TocWrapper = ({ toc }) => {
       border-2 bg-base-200 bg-opacity-30 p-4 rounded-lg border-base-200
     `}
     >
-      {mdxModule && <MdxContent components={{}} />}
+      {mdxModule && <MdxContent components={components} />}
     </div>
   ) : null
 }

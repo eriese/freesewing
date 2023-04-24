@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import orderBy from 'lodash.orderby'
 import { TutorialIcon, GuideIcon, HelpIcon, DocsIcon } from 'shared/components/icons.mjs'
+import { useApp } from 'shared/hooks/app-context.mjs'
 
 // List of icons matched to top-level slug
 const icons = {
@@ -153,13 +154,13 @@ const SubLevel = ({ nodes = {}, active }) => (
 )
 
 export const Icons = ({
-  app,
   ulClasses = '',
   linkClasses = `grow text-lg lg:text-xl py-1 text-base-content sm:text-base-content
   hover:text-secondary sm:hover:text-secondary hover:cursor-pointer
   flex flex-col items-center`,
   linkStyle = {},
 }) => {
+  const app = useApp()
   if (!app.navigation) return null
   const output = []
   for (const page of order(app.navigation)) {
