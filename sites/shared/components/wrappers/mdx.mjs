@@ -35,7 +35,7 @@ export const MdxWrapper = ({ mdx, app, t, components = {} }) => {
    * extra components via props
    */
   const allComponents = {
-    ...MdxComponents(app, t),
+    ...MdxComponents,
     ...components,
   }
 

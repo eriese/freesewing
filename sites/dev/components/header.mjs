@@ -5,10 +5,11 @@ import { ThemePicker } from 'shared/components/theme-picker/index.mjs'
 import { CloseIcon, MenuIcon, SearchIcon } from 'shared/components/icons.mjs'
 import { Ribbon } from 'shared/components/ribbon.mjs'
 import { WordMark } from 'shared/components/wordmark.mjs'
-
-export const Header = ({ app, setSearch }) => {
+import { useApp } from 'shared/hooks/app-context.mjs'
+export const Header = ({ setSearch }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0)
   const [show, setShow] = useState(true)
+  const app = useApp
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

@@ -10,6 +10,8 @@ import { Stack } from '../workbench/draft/stack'
 import { useGist } from 'shared/hooks/useGist'
 import { useEffect } from 'react'
 import yaml from 'js-yaml'
+import { useApp } from 'shared/hooks/app-context.mjs'
+import { useRenderTracing } from 'shared/hooks/useRenderTracing.mjs'
 
 // Get code from children
 export const asText = (reactEl) => {
@@ -102,7 +104,6 @@ const buildExample = (children, settings = { margin: 5 }, tutorial = false, pape
 
 // Wrapper component dealing with the tabs and code view
 export const TabbedExample = ({
-  app,
   children,
   caption,
   tutorial,
@@ -111,6 +112,11 @@ export const TabbedExample = ({
   paperless,
   settings,
 }) => {
+  useRenderTracing(
+    { children, caption, tutorial, previewFirst, withHead, settings, paperless },
+    'TabbedExample'
+  )
+  const app = useApp()
   if (settings)
     settings = {
       margin: 5,

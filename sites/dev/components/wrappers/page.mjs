@@ -9,16 +9,18 @@ import { LayoutWrapper } from 'site/components/wrappers/layout.mjs'
 import { DocsLayout } from 'site/components/layouts/docs.mjs'
 import { Modal } from 'shared/components/modal.mjs'
 import { Loader } from 'shared/components/loader.mjs'
+import { useApp } from 'shared/hooks/app-context.mjs'
 
 /* This component should wrap all page content */
 export const PageWrapper = ({
   title = 'FIXME: No title set',
   noSearch = false,
-  app = false,
+  hasApp = true,
   layout = DocsLayout,
   crumbs = false,
   children = [],
 }) => {
+  const app = useApp(hasApp)
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => (app.primaryMenu ? app.setPrimaryMenu(false) : null),
     onSwipedRight: () => (app.primaryMenu ? null : app.setPrimaryMenu(true)),
@@ -39,7 +41,6 @@ export const PageWrapper = ({
   const [search, setSearch] = useState(false)
 
   const childProps = {
-    app: app,
     title: title,
     crumbs: crumbs,
     search,

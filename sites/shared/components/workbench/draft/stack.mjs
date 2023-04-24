@@ -9,7 +9,7 @@ export const Stack = (props) => {
       {[...stack.parts].map((part) => (
         <Part
           {...{ gist, updateGist, unsetGist, showInfo }}
-          key={part.name}
+          key={part.name + part.set}
           partName={part.name}
           part={part}
         />

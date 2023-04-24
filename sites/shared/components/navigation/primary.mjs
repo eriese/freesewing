@@ -13,6 +13,7 @@ import {
   CommunityIcon,
   ShowcaseIcon,
 } from 'shared/components/icons.mjs'
+import { useApp } from 'shared/hooks/app-context.mjs'
 
 // Don't show children for blog and showcase posts
 const keepClosed = ['blog', 'showcase']
@@ -230,7 +231,6 @@ const Navigation = ({ app, active, className = '' }) => {
 }
 
 export const Icons = ({
-  app,
   ulClasses = '',
   liClasses = '',
   linkClasses = `grow text-lg lg:text-xl py-1 text-base-content sm:text-base-content
@@ -238,6 +238,7 @@ export const Icons = ({
   flex flex-col items-center`,
   linkStyle = {},
 }) => {
+  const app = useApp()
   if (!app.navigation) return null
   const output = []
   for (const page of order(app.navigation)) {
@@ -259,7 +260,7 @@ export const Icons = ({
 export const PrimaryNavigation = ({ app, active, before = [], after = [] }) => (
   <nav className="mb-12">
     {before}
-    <Icons app={app} ulClasses="hidden md:block lg:hidden flex flex-col items-center" />
+    <Icons ulClasses="hidden md:block lg:hidden flex flex-col items-center" />
     <Navigation app={app} active={active} className="md:hidden lg:block" />
     {after}
   </nav>

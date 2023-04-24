@@ -3,8 +3,10 @@ import Head from 'next/head'
 import { Header } from 'site/components/header.mjs'
 import { Footer } from 'site/components/footer.mjs'
 import { Search } from 'site/components/search.mjs'
+import { useApp } from 'shared/hooks/app-context.mjs'
 
-export const LayoutWrapper = ({ app, children = [], search, setSearch, noSearch = false }) => {
+export const LayoutWrapper = ({ children = [], search, setSearch, noSearch = false }) => {
+  const app = useApp()
   const startNavigation = () => {
     app.startLoading()
     // Force close of menu on mobile if it is open
