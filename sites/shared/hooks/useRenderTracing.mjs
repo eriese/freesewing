@@ -5,7 +5,7 @@ const doDebug = true
 export function useRenderTracing(props, componentName = 'Page') {
   // doDebug && console.log(`Initialize component ${componentName}`)
   const prev = useRef(props)
-  const [count, setCount] = useState(0)
+  const [, setCount] = useState(0)
 
   const drillProps = (curVal, prevVal, level = 0) => {
     if (curVal == prevVal) return

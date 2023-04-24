@@ -17,7 +17,7 @@ import { PrevNext } from '../mdx/prev-next.mjs'
 
 const Null = () => null
 
-export const MdxWrapper = ({ mdx, app, t, components = {} }) => {
+export const MdxWrapper = ({ mdx, app, components = {} }) => {
   const [mdxModule, setMdxModule] = useState()
 
   useEffect(() => {

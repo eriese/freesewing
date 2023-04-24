@@ -83,5 +83,6 @@ export function AppProvider({ children }) {
 }
 
 export function useApp(hasApp = true) {
-  return hasApp ? useContext(AppContext) : false
+  const context = useContext(AppContext)
+  return hasApp ? context : false
 }
