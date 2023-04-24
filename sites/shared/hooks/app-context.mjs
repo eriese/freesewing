@@ -6,7 +6,11 @@ import { prebuildNavigation } from 'site/prebuild/navigation.mjs'
 
 const AppContext = createContext(null)
 
-export function AppProvider({ children }) {
+export function AppProvider({ app, children }) {
+  return <AppContext.Provider value={app}>{children}</AppContext.Provider>
+}
+
+export function createApp() {
   // No translation for freesewing.dev
   const language = 'en'
 
@@ -20,7 +24,7 @@ export function AppProvider({ children }) {
   const [loading, setLoading] = useState(false)
   const [popup, setPopup] = useState(false)
 
-  const app = useMemo(
+  return useMemo(
     () => ({
       // Static vars
       site: 'dev',
@@ -78,8 +82,6 @@ export function AppProvider({ children }) {
       setTheme,
     ]
   )
-
-  return <AppContext.Provider value={app}>{children}</AppContext.Provider>
 }
 
 export function useApp(hasApp = true) {

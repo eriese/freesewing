@@ -25,37 +25,35 @@ const MdxPage = (props) => {
    * active state
    */
   return (
-    <AppProvider>
-      <PageWrapper {...props.page}>
-        <Head>
-          <meta property="og:type" content="article" key="type" />
-          <meta property="og:description" content={props.intro} key="type" />
-          <meta property="og:article:author" content="Joost De Cock" key="author" />
-          <meta
-            property="og:image"
-            content={`https://freesewing.dev/og/${props.page.slug}/og.png`}
-            key="image"
-          />
-          <meta property="og:image:type" content="image/png" />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
-          <meta property="og:url" content={`https://freesewing.dev/${props.page.slug}`} key="url" />
-          <meta property="og:locale" content="en_US" key="locale" />
-          <meta property="og:site_name" content="freesewing.dev" key="site" />
-        </Head>
-        <div className="grid grid-cols-3 lg:gap-4">
-          {props.toc && (
-            <div className="mb-8 w-full col-span-3 row-start-1 col-start-1 xl:col-span-1 xl:col-start-3">
-              <TocWrapper toc={props.toc} />
-            </div>
-          )}
-          <div className="col-span-3 col-start-1 xl:col-span-2 xl:row-start-1 row-start-2 xl:pl-4">
-            <MdxWrapper mdx={props.mdx} />
-            <HelpUs mdx slug={`/${props.page.slug}`} />
+    <PageWrapper {...props.page}>
+      <Head>
+        <meta property="og:type" content="article" key="type" />
+        <meta property="og:description" content={props.intro} key="type" />
+        <meta property="og:article:author" content="Joost De Cock" key="author" />
+        <meta
+          property="og:image"
+          content={`https://freesewing.dev/og/${props.page.slug}/og.png`}
+          key="image"
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content={`https://freesewing.dev/${props.page.slug}`} key="url" />
+        <meta property="og:locale" content="en_US" key="locale" />
+        <meta property="og:site_name" content="freesewing.dev" key="site" />
+      </Head>
+      <div className="grid grid-cols-3 lg:gap-4">
+        {props.toc && (
+          <div className="mb-8 w-full col-span-3 row-start-1 col-start-1 xl:col-span-1 xl:col-start-3">
+            <TocWrapper toc={props.toc} />
           </div>
+        )}
+        <div className="col-span-3 col-start-1 xl:col-span-2 xl:row-start-1 row-start-2 xl:pl-4">
+          <MdxWrapper mdx={props.mdx} />
+          <HelpUs mdx slug={`/${props.page.slug}`} />
         </div>
-      </PageWrapper>
-    </AppProvider>
+      </div>
+    </PageWrapper>
   )
 }
 

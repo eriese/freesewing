@@ -9,7 +9,7 @@ import { LayoutWrapper } from 'site/components/wrappers/layout.mjs'
 import { DocsLayout } from 'site/components/layouts/docs.mjs'
 import { Modal } from 'shared/components/modal.mjs'
 import { Loader } from 'shared/components/loader.mjs'
-import { useApp } from 'shared/hooks/app-context.mjs'
+import { createApp, AppProvider } from 'shared/hooks/app-context.mjs'
 
 /* This component should wrap all page content */
 export const PageWrapper = ({
@@ -20,7 +20,7 @@ export const PageWrapper = ({
   crumbs = false,
   children = [],
 }) => {
-  const app = useApp(hasApp)
+  const app = createApp(hasApp)
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => (app.primaryMenu ? app.setPrimaryMenu(false) : null),
     onSwipedRight: () => (app.primaryMenu ? null : app.setPrimaryMenu(true)),
@@ -52,21 +52,23 @@ export const PageWrapper = ({
   const Layout = layout
 
   return (
-    <div
-      ref={swipeHandlers.ref}
-      onMouseDown={swipeHandlers.onMouseDown}
-      data-theme={app.theme}
-      key={app.theme} // This forces the data-theme update
-    >
-      <Head>
-        <meta property="og:title" content={`${title} - FreeSewing.dev`} key="title" />
-        <title>{title} - FreeSewing.dev</title>
-      </Head>
-      <LayoutWrapper {...childProps}>
-        {Layout ? <Layout {...childProps}>{children}</Layout> : children}
-      </LayoutWrapper>
-      {app.popup && <Modal cancel={() => app.setPopup(false)}>{app.popup}</Modal>}
-      {app.loading && <Loader />}
-    </div>
+    <AppProvider app={app}>
+      <div
+        ref={swipeHandlers.ref}
+        onMouseDown={swipeHandlers.onMouseDown}
+        data-theme={app.theme}
+        key={app.theme} // This forces the data-theme update
+      >
+        <Head>
+          <meta property="og:title" content={`${title} - FreeSewing.dev`} key="title" />
+          <title>{title} - FreeSewing.dev</title>
+        </Head>
+        <LayoutWrapper {...childProps}>
+          {Layout ? <Layout {...childProps}>{children}</Layout> : children}
+        </LayoutWrapper>
+        {app.popup && <Modal cancel={() => app.setPopup(false)}>{app.popup}</Modal>}
+        {app.loading && <Loader />}
+      </div>
+    </AppProvider>
   )
 }
