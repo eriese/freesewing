@@ -49,7 +49,7 @@ export const sleeve = {
         title: 'sleeve',
       })
 
-      points.notch = new Point(0, sleeveWidth / 2).addTetxt('shoulder', 'center')
+      points.notch = new Point(0, sleeveWidth / 2).addText('shoulder', 'center')
 
       points.text1 = new Point(sleeveLength / 2, 10).addText('seam', 'center')
 
