@@ -11,6 +11,7 @@ const config = {
     externalDir: true,
   },
   i18n: i18nConfig.i18n,
+  eslint: { ignoreDuringBuilds: true },
   pageExtensions: ['js', 'mjs'],
   webpack: (config) => {
     // JSON support
