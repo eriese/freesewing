@@ -4,7 +4,7 @@ title: bartackAlong
 
 The `bartackAlong` macro allows you to add a _bartack_ marker to your sewing pattern.
 More specifically, a bartack along a path.
-It is provided by the [bartack plugin](/reference/plugins/bartack/).
+It is provided by the [annotations plugin](/reference/plugins/annotations).
 
 ## Signature
 
@@ -46,9 +46,15 @@ macro('banner', {
 | Property     | Default    | Type       | Description |
 |-------------:|------------|------------|-------------|
 | `angle`      | `0`        | `number`   | The angle under which to draw the bartack |
-| `density`    | `3`        | `number`   | Controls how close the stitches are togeter |
+| `density`    | `3`        | `number`   | Controls how close the stitches are together |
 | `length`     | `15`       | `number`   | Length of the bartack |
 | `path`       |            | `Path`     | The path the bartack should follow |
-| `prefix`     |            | `string`   | A prefix to apply to the names of the generated path and points |
-| `suffix`     |            | `string`   | A suffix to apply to the names of the generated path and points |
+| `prefix`     |            | `string`   | A prefix to apply to the name of the generated path |
+| `suffix`     |            | `string`   | A suffix to apply to the name of the generated path |
 | `width`      | `3`        | `number`   | Width of the bartack |
+
+## Result
+
+| Generated Element | Description |
+|-------------------|-------------|
+| `paths.${prefix}bartack${suffix}` | Path generated for the bartack marker |

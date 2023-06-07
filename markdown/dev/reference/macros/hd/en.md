@@ -3,7 +3,7 @@ title: hd
 ---
 
 The `hd` macro adds a _horizontal dimension_ to your pattern.
-It is provided by the [dimension plugin](/reference/plugins/dimension/).
+It is provided by the [annotations plugin](/reference/plugins/annotations).
 
 ## Signature
 
@@ -11,7 +11,7 @@ It is provided by the [dimension plugin](/reference/plugins/dimension/).
 macro('hd', {
   String id,
   Point from,
-  Boolean noEndtMarker,
+  Boolean noEndMarker,
   Boolean noStartMarker,
   String text,
   Point to,
@@ -43,10 +43,18 @@ macro('hd', {
 | `from`          |          | [Point](/reference/api/point) | The startpoint of the dimension |
 | `to`            |          | [Point](/reference/api/point) | The endpoint of the dimension |
 | `y`             |          | Number              | The Y-value at which to draw the dimension |
-| `id`            | auto-assigned | String | A custom ID under wich paths and points will be created |
+| `id`            | auto-assigned | String | A custom ID under which paths and points will be created |
 | `text`          | Horizontal distance | Number   | The text to go on the dimension if not the from-to horizontal distance |
 | `noStartMarker` | `false`  | Boolean             | Whether to not draw a start marker |
 | `noEndMarker`  | `false`  | Boolean             | Whether to not draw an end marker |
+
+## Result
+
+| Generated Element | Description |
+|-------------------|-------------|
+| `paths.${id}` | Path for the span of the dimension |
+| `paths.${id}_ls` | Path for the leader to the start of the dimension |
+| `paths.${id}_le` | Path for the leader to the end of the dimension |
 
 ## Notes
 

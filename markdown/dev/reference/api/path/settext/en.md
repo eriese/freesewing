@@ -2,7 +2,7 @@
 title: Path.setText()
 ---
 
-The `Path.addText()` method set text on the path.
+The `Path.setText()` method sets text on the path.
 
 ## Signature
 
@@ -25,7 +25,7 @@ The second argument will optionally be used to set the CSS class for the text.
   paths.line = new Path()
     .move(points.from)
     .line(points.to)
-    .addText('FreeSewing rocks')
+    .setText('FreeSewing rocks')
 
   return part
 }
@@ -45,4 +45,3 @@ path.setText('Hello')
 The difference with [Path.addText()](/reference/api/path/addtext) is that this
 method will overwrite existing text on the path, whereas `Path.addText()` will
 add to the existing text.
-

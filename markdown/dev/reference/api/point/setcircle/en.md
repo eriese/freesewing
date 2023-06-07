@@ -16,7 +16,7 @@ how circles are handled.
 
 ```js
 Point point.setCircle(
-  string text, 
+  number radius,
   string className
 )
 ```
@@ -25,7 +25,7 @@ Point point.setCircle(
 
 ## Example
 
-<Example caption="Examples of Point.setCircle(), compare this to [Point.addCircle](/reference/api/point/addcircle)">
+<Example caption="Examples of Point.setCircle(), compare this to [Point.addCircle()](/reference/api/point/addcircle)">
 ```js
 ({ Point, points, part }) => {
 
@@ -48,5 +48,3 @@ Point point.setCircle(
 }
 ```
 </Example>
-
-

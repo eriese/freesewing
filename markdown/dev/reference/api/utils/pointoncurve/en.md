@@ -62,4 +62,4 @@ bool utils.pointOnCurve(
 
 ## Notes
 
-Keep in mind that calculations with Bezier curves are often aproximations.
+Keep in mind that calculations with Bézier curves are often approximations.

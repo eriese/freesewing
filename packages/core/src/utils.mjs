@@ -44,7 +44,7 @@ export function beamIntersectsCircle(c, r, p1, p2, sort = 'x') {
 }
 
 /**
- * Finds qhere an endless line intersects with a given X-value
+ * Finds where an endless line intersects with a given X-value
  *
  * @param {Point} from - First Point on the line
  * @param {Point} to - Second Point on the line
@@ -60,7 +60,7 @@ export function beamIntersectsX(from, to, x) {
 }
 
 /**
- * Finds qhere an endless line intersects with a given Y-value
+ * Finds where an endless line intersects with a given Y-value
  *
  * @param {Point} from - First Point 1 on the line
  * @param {Point} to - Second Point on the line
@@ -109,6 +109,24 @@ export function beamsIntersect(a1, a2, b1, b2) {
 
     return new Point(x, y)
   }
+}
+
+/**
+ * Find the intersections between an endless line (beam) and a curve
+ *
+ *
+ * @param {Point} start - Start Point of the line
+ * @param {Point} end - End Point of the line
+ * @param {Point} from - Start Point of the curve
+ * @param {Point} cp1 - Control Point at the start of the curve
+ * @param {Point} cp2 - Control Point at the end of the curve
+ * @param {Point} to - End Point of the curve
+ * @return {Array} intersections - An array of Points at the intersections
+ */
+export function beamIntersectsCurve(start, end, from, cp1, cp2, to) {
+  let _start = new Point(start.x + (start.x - end.x) * 1000, start.y + (start.y - end.y) * 1000)
+  let _end = new Point(end.x + (end.x - start.x) * 1000, end.y + (end.y - start.y) * 1000)
+  return lineIntersectsCurve(_start, _end, from, cp1, cp2, to)
 }
 
 /**
@@ -162,7 +180,7 @@ export function circlesIntersect(c1, r1, c2, r2, sort = 'x') {
  * @param {BezierJs} curve - A BezierJs curve instance
  * @param {string} edge - The edge to find: top, bottom, right, or left
  * @param {int} steps - The number of steps to divide the curve in while walking it
- * @return {Array} intersecions - An Array of Point objects of all intersections
+ * @return {Point} edgepoint - A Point object located on the edge of the curve. Returns the first point found, if more than one lies on the edge.
  */
 export function curveEdge(curve, edge, steps = 500) {
   let x = Infinity
@@ -194,7 +212,7 @@ export function curveEdge(curve, edge, steps = 500) {
  * @param {Point} cp2 - Control Point at the end of the curve
  * @param {Point} to - End Point of the curve
  * @param {float} x - X-value to check for intersections
- * @return {Array} intersecions - An Array of Point objects of all intersections
+ * @return {Array} intersections - An Array of Point objects of all intersections
  */
 export function curveIntersectsX(from, cp1, cp2, to, x) {
   let start = new Point(x, -10000)
@@ -210,7 +228,7 @@ export function curveIntersectsX(from, cp1, cp2, to, x) {
  * @param {Point} cp2 - Control Point at the end of the curve
  * @param {Point} to - End Point of the curve
  * @param {float} y - Y-value to check for intersections
- * @return {Array} intersecions - An Array of Point objects of all intersections
+ * @return {Array} intersections - An Array of Point objects of all intersections
  */
 export function curveIntersectsY(from, cp1, cp2, to, y) {
   let start = new Point(-10000, y)
@@ -229,7 +247,9 @@ export function curveIntersectsY(from, cp1, cp2, to, y) {
  * @param {Point} cp1B - Control Point at the start of the second curve
  * @param {Point} cp2B - Control Point at the end of the second curve
  * @param {Point} toB - End Point of the fsecond curve
- * @return {Array} intersecions - An Array of Point objects of all intersections between the curves
+ * @return {Array} intersections - An Array of Point objects of all intersections between the curves, when there are more than 1 intersection
+ * @return {Point} intersection - A Point object of the intersection when there is exactly 1 intersection
+ * @return {Boolean} - false when there are no intersections
  */
 export function curvesIntersect(fromA, cp1A, cp2A, toA, fromB, cp1B, cp2B, toB) {
   let precision = 0.005 // See https://github.com/Pomax/bezierjs/issues/99
@@ -263,7 +283,7 @@ export function curvesIntersect(fromA, cp1A, cp2A, toA, fromB, cp1B, cp2B, toB) 
       }
       if (!dupe) unique.push(i)
     }
-    return unique
+    return unique.length === 1 ? unique.shift() : unique
   }
 }
 
@@ -286,16 +306,16 @@ export function deg2rad(degrees) {
  * @param {bool} flipX - Whether or not to flip/mirror along the X-axis
  * @param {bool} flipY - Whether or not to flip/mirror along the Y-axis
  * @param {Stack} stack - The Stack instance
- * @return {string} transform - The SVG transform value
+ * @return {String[]} transform - An array of SVG transform values
  */
-export const generateStackTransform = (
+export function generateStackTransform(
   x = 0,
   y = 0,
   rotate = 0,
   flipX = false,
   flipY = false,
   stack
-) => {
+) {
   const transforms = []
   let xTotal = x || 0
   let yTotal = y || 0
@@ -318,7 +338,7 @@ export const generateStackTransform = (
 
   // add the scaling to the transforms
   if (scaleX + scaleY < 2) {
-    transforms.push(`scale(${scaleX} ${scaleY})`)
+    transforms.push(`scale(${scaleX}, ${scaleY})`)
   }
 
   if (rotate) {
@@ -329,16 +349,13 @@ export const generateStackTransform = (
     }
 
     // add the rotation around the center to the transforms
-    transforms.push(`rotate(${rotate} ${center.x} ${center.y})`)
+    transforms.push(`rotate(${rotate}, ${center.x}, ${center.y})`)
   }
 
   // put the translation before any other transforms to avoid having to make complex calculations once the matrix has been rotated or scaled
-  if (xTotal !== 0 || yTotal !== 0) transforms.unshift(`translate(${xTotal} ${yTotal})`)
+  if (xTotal !== 0 || yTotal !== 0) transforms.unshift(`translate(${xTotal}, ${yTotal})`)
 
-  return {
-    transform: transforms.join(' '),
-    // 'transform-origin': `${center.x} ${center.y}`
-  }
+  return transforms
 }
 
 /**
@@ -631,7 +648,7 @@ export function __asNumber(value, param, method, log) {
       value = Number(value)
       return value
     } catch {
-      this.log.error(
+      log.error(
         `Called \`${method}(${param})\` but \`${param}\` is not a number nor can it be cast to one`
       )
     }
@@ -662,4 +679,208 @@ export function __isCoord(value) {
  */
 export function __macroName(name) {
   return `__macro_${name}`
+}
+
+/**
+ * Helper method to parse an (SVG) transform string
+ *
+ * @private
+ * @param {string} transform - The SVG transform string
+ * @return {object} result - An object with the parts, name, and values
+ */
+function __parseTransform(transform) {
+  const parts = transform.match(/(\w+)\(([^)]+)\)/)
+  const name = parts[1]
+  const values = parts[2].split(/,\s*/).map(parseFloat)
+
+  return { parts, name, values }
+}
+
+/**
+ * Applies a transformation of the given type to the matrix
+ * @param  {String} transformationType   the transformation type (tranlate, rotate, scale, skew, etc)
+ * @param  {Number[]} matrix             the matrix to apply the transform to
+ * @param  {Number[]} values             the transformation values to apply
+ * @return {Number[]}                    the transformed matrix
+ */
+function matrixTransform(transformationType, matrix, values) {
+  // Update matrix for transform
+  switch (transformationType) {
+    case 'matrix':
+      matrix = [
+        matrix[0] * values[0] + matrix[2] * values[1],
+        matrix[1] * values[0] + matrix[3] * values[1],
+        matrix[0] * values[2] + matrix[2] * values[3],
+        matrix[1] * values[2] + matrix[3] * values[3],
+        matrix[0] * values[4] + matrix[2] * values[5] + matrix[4],
+        matrix[1] * values[4] + matrix[3] * values[5] + matrix[5],
+      ]
+      break
+    case 'translate':
+      matrix[4] += matrix[0] * values[0] + matrix[2] * values[1]
+      matrix[5] += matrix[1] * values[0] + matrix[3] * values[1]
+      break
+    case 'scale':
+      matrix[0] *= values[0]
+      matrix[1] *= values[0]
+      matrix[2] *= values[1]
+      matrix[3] *= values[1]
+      break
+    case 'rotate': {
+      const angle = (values[0] * Math.PI) / 180
+      const centerX = values[1]
+      const centerY = values[2]
+
+      // if there's a rotation center, we need to move the origin to that center
+      if (centerX) {
+        matrix = matrixTransform('translate', matrix, [centerX, centerY])
+      }
+
+      // rotate
+      const cos = Math.cos(angle)
+      const sin = Math.sin(angle)
+      matrix = [
+        matrix[0] * cos + matrix[2] * sin,
+        matrix[1] * cos + matrix[3] * sin,
+        matrix[0] * -sin + matrix[2] * cos,
+        matrix[1] * -sin + matrix[3] * cos,
+        matrix[4],
+        matrix[5],
+      ]
+
+      // move the origin back to origin
+      if (centerX) {
+        matrix = matrixTransform('translate', matrix, [-centerX, -centerY])
+      }
+      break
+    }
+    case 'skewX':
+      matrix[2] += matrix[0] * Math.tan((values[0] * Math.PI) / 180)
+      matrix[3] += matrix[1] * Math.tan((values[0] * Math.PI) / 180)
+      break
+    case 'skewY':
+      matrix[0] += matrix[2] * Math.tan((values[0] * Math.PI) / 180)
+      matrix[1] += matrix[3] * Math.tan((values[0] * Math.PI) / 180)
+      break
+  }
+
+  return matrix
+}
+
+/**
+ * Combines an array of (SVG) transforms into a single matrix transform
+ *
+ * @param {array} transorms - The list of transforms to combine
+ * @return {string} matrixTransform - The combined matrix transform
+ */
+export function combineTransforms(transforms = []) {
+  // Don't bother if there are no part transforms
+  if (transforms.length < 1) return ''
+
+  // The starting matrix
+  let matrix = [1, 0, 0, 1, 0, 0]
+
+  // Loop through the transforms
+  for (let i = 0; i < transforms.length; i++) {
+    // Parse the transform string
+    const { name, values } = __parseTransform(transforms[i])
+    matrix = matrixTransform(name, matrix, values)
+  }
+
+  // Return the combined matrix transform
+  return 'matrix(' + matrix.join(', ') + ')'
+}
+
+/**
+ * Applies and (SVG) transform to a point's coordinates (x and y)
+ *
+ * @param {string} transorm - The transform to apply
+ * @param {Point} point - The point of which to update the coordinates
+ * @return {Point} point - The point with the transform applied to its coordinates
+ */
+export function applyTransformToPoint(transform, point) {
+  // Parse the transform string
+  const { name, values } = __parseTransform(transform)
+
+  // The starting matrix
+  let matrix = [1, 0, 0, 1, 0, 0]
+
+  // Update matrix for transform
+  switch (name) {
+    case 'matrix':
+      matrix = values
+      break
+    case 'translate':
+      matrix[4] = values[0]
+      matrix[5] = values[1]
+      break
+    case 'scale':
+      matrix[0] = values[0]
+      matrix[3] = values[1]
+      break
+    case 'rotate': {
+      const angle = (values[0] * Math.PI) / 180
+      const cos = Math.cos(angle)
+      const sin = Math.sin(angle)
+      console.log('in rotate', { angle })
+      matrix = [cos, sin, -sin, cos, 0, 0]
+      break
+    }
+    case 'skewX':
+      matrix[2] = Math.tan((values[0] * Math.PI) / 180)
+      break
+    case 'skewY':
+      matrix[1] = Math.tan((values[0] * Math.PI) / 180)
+      break
+  }
+
+  // Apply the matrix transform to the coordinates
+  const newX = point.x * matrix[0] + point.y * matrix[2] + matrix[4]
+  const newY = point.x * matrix[1] + point.y * matrix[3] + matrix[5]
+
+  point.x = newX
+  point.y = newY
+
+  return point
+}
+
+/**
+ * Get the bounds of a given object after transforms have been applied
+ * @param  {Object}           boundsObj   any object with `topLeft` and `bottomRight` properties
+ * @param  {Boolean|String[]} transforms  the transforms to apply to the bounds, structured as they would be for being applied as an svg attribute
+ * @return {Object}                       `tl` and `br` for the transformed bounds
+ */
+export function getTransformedBounds(boundsObj, transforms = false) {
+  if (!boundsObj.topLeft) return {}
+  // get all corners of the part's bounds
+  let tl = boundsObj.topLeft
+  let br = boundsObj.bottomRight
+  let tr = new Point(br.x, tl.y)
+  let bl = new Point(tl.x, br.y)
+
+  // if there are transforms on the part, apply them to the corners so that we have the correct bounds
+  if (transforms) {
+    const combinedTransform = combineTransforms(transforms)
+
+    tl = applyTransformToPoint(combinedTransform, tl.copy())
+    br = applyTransformToPoint(combinedTransform, br.copy())
+    tr = applyTransformToPoint(combinedTransform, tr.copy())
+    bl = applyTransformToPoint(combinedTransform, bl.copy())
+  }
+
+  // now get the top left and bottom right after transforms
+  const transformedTl = new Point(
+    Math.min(tl.x, br.x, bl.x, tr.x),
+    Math.min(tl.y, br.y, bl.y, tr.y)
+  )
+
+  const transformedBr = new Point(
+    Math.max(tl.x, br.x, bl.x, tr.x),
+    Math.max(tl.y, br.y, bl.y, tr.y)
+  )
+
+  return {
+    tl: transformedTl,
+    br: transformedBr,
+  }
 }

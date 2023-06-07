@@ -1,5 +1,6 @@
 import { constructMainDart, shapeSideSeam, dartPath } from './shared.mjs'
 import { front as brianFront } from '@freesewing/brian'
+import { hidePresets } from '@freesewing/core'
 import {
   frontOverlap,
   necklineDrop,
@@ -21,6 +22,14 @@ import {
   lengthBonus,
   acrossBackFactor,
   frontArmholeDeeper,
+  bicepsEase,
+  collarEase,
+  cuffEase,
+  shoulderEase,
+  s3Collar,
+  s3Armhole,
+  shoulderSlopeReduction,
+  backNeckCutout,
 } from './options.mjs'
 
 function wahidFront({
@@ -493,7 +502,7 @@ function wahidFront({
 export const front = {
   name: 'wahid.front',
   from: brianFront,
-  hideDependencies: true,
+  hide: hidePresets.HIDE_TREE,
   measurements: ['hips', 'waist'],
   options: {
     frontOverlap,
@@ -516,6 +525,14 @@ export const front = {
     lengthBonus,
     acrossBackFactor,
     frontArmholeDeeper,
+    bicepsEase,
+    collarEase,
+    cuffEase,
+    shoulderEase,
+    s3Collar,
+    s3Armhole,
+    shoulderSlopeReduction,
+    backNeckCutout,
   },
   draft: wahidFront,
 }

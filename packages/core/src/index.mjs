@@ -1,17 +1,19 @@
 import { Bezier } from 'bezier-js'
 import { Attributes } from './attributes.mjs'
 import { Design } from './design.mjs'
-import { Pattern } from './pattern.mjs'
+import { Pattern } from './pattern/index.mjs'
 import { Part } from './part.mjs'
 import { Point } from './point.mjs'
 import { Path } from './path.mjs'
 import { Snippet } from './snippet.mjs'
 import { Store } from './store.mjs'
+import { hidePresets } from './pattern/pattern-config.mjs'
 import {
   beamIntersectsCircle,
   beamIntersectsX,
   beamIntersectsY,
   beamsIntersect,
+  beamIntersectsCurve,
   capitalize,
   circlesIntersect,
   curveEdge,
@@ -20,6 +22,7 @@ import {
   curvesIntersect,
   deg2rad,
   generateStackTransform,
+  getTransformedBounds,
   lineIntersectsCircle,
   lineIntersectsCurve,
   linesIntersect,
@@ -47,11 +50,14 @@ export {
   Store,
   version,
   Bezier,
+  //consts
+  hidePresets,
   // Utils
   beamIntersectsCircle,
   beamIntersectsX,
   beamIntersectsY,
   beamsIntersect,
+  beamIntersectsCurve,
   capitalize,
   circlesIntersect,
   curveEdge,
@@ -60,6 +66,7 @@ export {
   curvesIntersect,
   deg2rad,
   generateStackTransform,
+  getTransformedBounds,
   lineIntersectsCircle,
   lineIntersectsCurve,
   linesIntersect,

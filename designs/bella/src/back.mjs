@@ -253,16 +253,19 @@ export const back = {
       .close()
       .hide()
 
+    macro('grainline', {
+      from: new Point(points.hps.x / 2, points.shoulder.y),
+      to: new Point(points.hps.x / 2, points.waistSide.y),
+    })
+
+    store.cutlist.addCut()
+
     if (complete) {
       points.titleAnchor = new Point(points.hps.x, points.armholePitchCp2.y)
       macro('title', {
         nr: 2,
         title: 'back',
         at: points.titleAnchor,
-      })
-      macro('grainline', {
-        from: new Point(points.hps.x / 2, points.shoulder.y),
-        to: new Point(points.hps.x / 2, points.waistSide.y),
       })
       macro('sprinkle', {
         snippet: 'bnotch',

@@ -53,7 +53,7 @@ const pattern = new Florence([
 We refer to these *multiple sets of settings* as **multisets**.
 It is what powers FreeSewing's [sampling capabilities](/reference/api/pattern/sample) but
 it also allows you to draft some pattern parts with one set of measurements, and other parts
-with another set. For example if you have an asymetric model to fit.
+with another set. For example if you have an asymmetric model to fit.
 
 <Note>
 
@@ -71,9 +71,11 @@ It just so happens that in most cases, there will be only one settings object in
 
 - `Pattern.activePart`: Holds the id of the active part (while drafting)
 - `Pattern.activeSet`: Holds the id of the active set (while drafting)
-- `Pattern.designConfig`: Holds the design's configuration
-- `Pattern.designConfig`: Holds the design's configuration
-- `Pattern.patternConfig`: Holds the pattern's configuration
+- `Pattern.config`: Holds the resolved pattern's configuration
+- `Pattern.designConfig`: Holds the design's configuration before resolution
+- `Pattern.parts`: Holds the parts used in the pattern
+- `Pattern.plugins`: Holds the plugins used in the pattern
+- `Pattern.settings`: Holds the settings used for the pattern
 - `Pattern.store`: Holds the pattern-wide Store
 - `Pattern.setStores`: Holds an array of stores, one for each set of settings.
 

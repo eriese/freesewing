@@ -1,5 +1,5 @@
 import { back as titanBack } from '@freesewing/titan'
-import { pctBasedOn } from '@freesewing/core'
+import { pctBasedOn, hidePresets } from '@freesewing/core'
 import { elastics, smallSteps } from '@freesewing/snapseries'
 
 function pacoBack({
@@ -94,7 +94,7 @@ function pacoBack({
     let outseam = drawOutseam(true).reverse()
     points.pocketFlapTopIn = outseam.shiftAlong(absoluteOptions.frontPocketFlapSize)
     points.pocketFlapBottomIn = outseam.shiftAlong(
-      options.frontPocketFlapSize + measurements.heel * options.frontPocketHeelRatio
+      absoluteOptions.frontPocketFlapSize + measurements.heel * options.frontPocketHeelRatio
     )
     points.pocketFlapTopOut = points.pocketFlapTopIn
       .shiftTowards(points.pocketFlapBottomIn, absoluteOptions.frontPocketFlapSize)
@@ -312,7 +312,8 @@ function pacoBack({
 export const back = {
   name: 'paco.back',
   from: titanBack,
-  hideDependencies: true,
+  hide: hidePresets.HIDE_TREE,
+  measurements: ['heel'],
   options: {
     // Constants
     titanPaperless: false,

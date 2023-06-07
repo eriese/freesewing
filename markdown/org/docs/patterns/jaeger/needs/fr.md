@@ -17,22 +17,21 @@ To make Jaeger, you will need the following:
 
 <Note>
 
-###### Where to get all this stuff
+That is because this kind of project is somewhat more ambitious than the
+typical home sewing project, and as a result, your local haberdashery is
+unlikely to stock all of these things.
 
-Making Jaeger is a fun and rewarning project, but getting all the required bits and pieces can be challenging.
+Si vous savez où les obtenir, génial.
 
-En effet, ce type de projet est un peu plus ambitieux que le projet typique de couture de maison.
-et en conséquence, votre haberdashery local ne va probablement pas stocker toutes ces choses.
+Si vous savez où les obtenir, génial. If not, some (quality) suppliers
+sometimes sell a **Jacket trim pack** that includes everything you need.
 
-Si vous savez où les obtenir, génial. If not, you can get a **Jacket trim pack** from
-[Kenton Trimmings](http://kentontrimmings.co.uk/shop/) in London, they ship to international customers.
+Below is a list of suppliers we are aware of where you can get this.
+We have no affiliation with these suppliers.
 
-It's a shop for professionals (they're not even open on Saturdays) but they don't require you to be a business
-to place an order.
+- [B. Black & Sons](https://www.bblackandsons.com/) is based in the US
+- [Kenton Trimmings](http://kentontrimmings.co.uk/shop/) in based in the UK
 
-I have no affiliation with these guys, but it's the only place I know of that will sell you a kit of
-professional trimmings to make a jacket.
-
-Si vous connaissez un autre endroit qui porte cette chose, faites-le nous savoir.
+If you know of other places that carries this stuff, please let us know.
 
 </Note>

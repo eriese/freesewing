@@ -1,8 +1,8 @@
 ---
-title: Hide ore remove paths from an inherited part
+title: Hide or remove paths from an inherited part
 ---
 
-To hide remove paths from an inherited part, iterate over the `paths` object
+To hide paths from an inherited part, iterate over the `paths` object
 and call `Path.hide()` on all entries:
 
 ```mjs
@@ -22,7 +22,7 @@ Do __not__ replace the `path` object:
 paths = {}
 ```
 
-as the `paths` object is more than a pojo (plain old javascript object)
+as the `paths` object is more than a pojo (plain old JavaScript object)
 </Warning>
 
 <Tip>

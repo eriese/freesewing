@@ -1,6 +1,6 @@
 {
   "name": "rehype-highlight-lines",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.12",
   "description": "A Rehype plugin to add highlighted lines to code blocks",
   "author": "Joost De Cock <joost@joost.at> (https://github.com/joostdecock)",
   "homepage": "https://freesewing.org/",
@@ -28,11 +28,11 @@
     "test": "echo \"rehype-highlight-lines: No tests configured. Perhaps you could write some?\" && exit 0",
     "lab": "cd ../../sites/lab && yarn start",
     "tips": "node ../../scripts/help.mjs",
-    "lint": "npx eslint 'src/**' 'tests/*.mjs'"
+    "lint": "npx eslint 'src/*.mjs'"
   },
   "peerDependencies": {},
   "dependencies": {
-    "unist-util-remove": "^3.1.0"
+    "unist-util-remove": "3.1.1"
   },
   "devDependencies": {},
   "files": [

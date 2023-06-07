@@ -2,7 +2,7 @@
 title: Setting a value in millimeter as a percentage option
 ---
 
-Percentage options are great for parametric desing, but not always
+Percentage options are great for parametric design, but not always
 very intuitive for the user. For example: A user may desire 13
 centimeters (5 inches) of chest ease. But what percentage should
 they set the `chestEase` option to to accomplish this?
@@ -33,7 +33,7 @@ function fromAbs(millimeter, settings) {
 ```
 
 The first parameter is the desired value in millimeter (for example
-`130` for `13cm`).
+`130` for `13 cm`).
 The second parameter is the pattern's [settings](/reference/settings) object
 which holds -- among other things -- the measurements provided by the user.
 
@@ -91,4 +91,4 @@ it will also add a `toAbs()` method that does the inverse: return the
 value in millimeter of whatever percentage the option is set to.
 
 See [Reporting a percentage option value in
-millimeter](/reference/api/config/options/pct/toabs) for details.
+millimeter](/reference/api/part/config/options/pct/toabs) for details.

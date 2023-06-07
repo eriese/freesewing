@@ -1,4 +1,5 @@
 import { Attributes } from './attributes.mjs'
+import { Defs } from './defs.mjs'
 import { __addNonEnumProp, round } from './utils.mjs'
 import { version } from '../data.mjs'
 
@@ -31,7 +32,7 @@ export function Svg(pattern) {
   this.layout = {}
   this.body = ''
   this.style = ''
-  this.defs = ''
+  this.defs = new Defs()
 }
 
 //////////////////////////////////////////////
@@ -47,7 +48,6 @@ export function Svg(pattern) {
 Svg.prototype.render = function () {
   this.idPrefix = this.pattern?.settings?.[0]?.idPrefix || 'fs-'
   this.__runHooks('preRender')
-  this.pattern.__runHooks('postLayout')
   if (!this.pattern.settings[0].embed) {
     this.attributes.add('width', round(this.pattern.width) + 'mm')
     this.attributes.add('height', round(this.pattern.height) + 'mm')
@@ -62,7 +62,7 @@ Svg.prototype.render = function () {
     this.activeStack = stackId
     this.idPrefix = this.pattern.settings[this.activeStackIndex]?.idPrefix || 'fs-'
     const stack = this.pattern.stacks[stackId]
-    if (!stack.hidden) {
+    if (!this.pattern.__isStackHidden(stackId)) {
       const stackSvg = this.__renderStack(stack)
       this.layout[stackId] = {
         svg: stackSvg,
@@ -142,7 +142,7 @@ Svg.prototype.__insertText = function (text) {
   if (this.hooks.insertText.length > 0) {
     for (let hook of this.hooks.insertText)
       text = hook.method(
-        this.pattern.settings[this.activeStackIndex].locale || 'en',
+        this.pattern.settings[this.pattern.activeSet].locale || 'en',
         text,
         hook.data
       )
@@ -216,7 +216,7 @@ Svg.prototype.__renderCircle = function (point) {
 Svg.prototype.__renderDefs = function () {
   let svg = '<defs>'
   this.__indent()
-  svg += this.__nl() + this.defs
+  svg += this.__nl() + this.defs.render()
   this.__outdent()
   svg += this.__nl() + '</defs>' + this.__nl()
 

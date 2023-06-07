@@ -86,6 +86,8 @@ Unreleased:
   Fixed:
     albert:
       - Workaround for not finding a suitable legband radius
+    unice:
+      - Fixed bug which prevented parts from being generated as intended
     waralee:
       - Fixed crotch depth issue
       - Fixed pocket size issue
@@ -94,13 +96,19 @@ Unreleased:
   Changed:
     plugin-title:
       - Use localized date format
+    unice:
+      - Updated gusset to always curve inward
 
   Added:
+    unice:
+      - Added new Front Curve and Back Curve style options
     waralee:
       - Added *mini* version of main pants part
       - Added new pocket options
       - Added seperate waistband options
       - Added bow tie placement option
+    components:
+      - Added linedrawing for Lunetius
 
 2.22.0:
   date: 2022-08-23

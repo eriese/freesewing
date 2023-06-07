@@ -167,6 +167,36 @@ Path.prototype.bbox = function () {
 }
 
 /**
+ * Returns this after cleaning out in-place path operations
+ *
+ * Cleaned means that any in-place ops will be removed
+ * An in-place op is when a drawing operation doesn't draw anything
+ * like a line from the point to the same point
+ *
+ * @return {Path} this - This, but cleaned
+ */
+Path.prototype.clean = function () {
+  const ops = []
+  let cur
+  for (const i in this.ops) {
+    const op = this.ops[i]
+    if (['move', 'close', 'noop'].includes(op.type)) ops.push(op)
+    else if (op.type === 'line') {
+      if (!op.to.sitsRoughlyOn(cur)) ops.push(op)
+    } else if (op.type === 'curve') {
+      if (!(op.cp1.sitsRoughlyOn(cur) && op.cp2.sitsRoughlyOn(cur) && op.to.sitsRoughlyOn(cur)))
+        ops.push(ops)
+    }
+    cur = op?.to
+  }
+
+  if (ops.length < this.ops.length) this.ops = ops
+
+  // A path with not drawing operations or only a move is not path at all
+  return ops.length === 0 || (ops.length === 1 && ops[0].type === 'move') ? false : this
+}
+
+/**
  * Returns a deep copy of this path
  *
  * @return {Path} clone - A clone of this Path instance
@@ -461,7 +491,7 @@ Path.prototype.intersectsY = function (y) {
 Path.prototype.join = function (that, closed = false) {
   if (that instanceof Path !== true)
     this.log.error('Called `Path.join(that)` but `that` is not a `Path` object')
-  return __joinPaths([this, that], closed, this.log)
+  return __joinPaths([this, that], closed)
 }
 
 /**
@@ -543,7 +573,7 @@ Path.prototype.noop = function (id = false) {
 Path.prototype.offset = function (distance) {
   distance = __asNumber(distance, 'distance', 'Path.offset', this.log)
 
-  return __pathOffset(this, distance, this.log)
+  return __pathOffset(this, distance)
 }
 
 /**
@@ -814,8 +844,8 @@ Path.prototype.split = function (point) {
       }
     }
   }
-  if (firstHalf.length > 0) firstHalf = __joinPaths(firstHalf, false, this.log)
-  if (secondHalf.length > 0) secondHalf = __joinPaths(secondHalf, false, this.log)
+  if (firstHalf.length > 0) firstHalf = __joinPaths(firstHalf, false)
+  if (secondHalf.length > 0) secondHalf = __joinPaths(secondHalf, false)
 
   return [firstHalf, secondHalf]
 }
@@ -901,9 +931,9 @@ Path.prototype.trim = function () {
           first = false
         }
         let joint
-        if (trimmedStart.length > 0) joint = __joinPaths(trimmedStart, false, this.log).join(glue)
+        if (trimmedStart.length > 0) joint = __joinPaths(trimmedStart, false).join(glue)
         else joint = glue
-        if (trimmedEnd.length > 0) joint = joint.join(__joinPaths(trimmedEnd, false, this.log))
+        if (trimmedEnd.length > 0) joint = joint.join(__joinPaths(trimmedEnd, false))
 
         return joint.trim()
       }
@@ -1117,6 +1147,7 @@ function __asPath(bezier, log = false) {
       new Point(bezier.points[2].x, bezier.points[2].y),
       new Point(bezier.points[3].x, bezier.points[3].y)
     )
+    .clean()
 }
 
 /**
@@ -1172,6 +1203,8 @@ function __joinPaths(paths, closed = false) {
     for (let op of p.ops) {
       if (op.type === 'curve') {
         joint.curve(op.cp1, op.cp2, op.to)
+      } else if (op.type === 'noop') {
+        joint.noop(op.id)
       } else if (op.type !== 'close') {
         // We're using sitsRoughlyOn here to avoid miniscule line segments
         if (current && !op.to.sitsRoughlyOn(current)) joint.line(op.to)
@@ -1248,10 +1281,9 @@ function __offsetLine(from, to, distance, log = false) {
  * @private
  * @param {Path} path - The Path to offset
  * @param {float} distance - The distance to offset by
- * @param {object} log - The log methods
  * @return {Path} offsetted - The offsetted Path instance
  */
-function __pathOffset(path, distance, log) {
+function __pathOffset(path, distance) {
   let offset = []
   let current
   let start = false
@@ -1279,13 +1311,16 @@ function __pathOffset(path, distance, log) {
         { x: cp2.x, y: cp2.y },
         { x: op.to.x, y: op.to.y }
       )
-      for (let bezier of b.offset(distance)) offset.push(__asPath(bezier, path.log))
+      for (let bezier of b.offset(distance)) {
+        const segment = __asPath(bezier, path.log)
+        if (segment) offset.push(segment)
+      }
     } else if (op.type === 'close') closed = true
     if (op.to) current = op.to
     if (!start) start = current
   }
 
-  return __joinPaths(offset, closed, log)
+  return __joinPaths(offset, closed)
 }
 
 /**

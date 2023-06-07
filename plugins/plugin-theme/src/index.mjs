@@ -28,8 +28,8 @@ export const plugin = {
       const current = svg.attributes.get('class')
       if (!current || current.indexOf('freesewing') !== -1) {
         svg.attributes.set('class', 'freesewing')
-        svg.style += sampleStyle
-        svg.style += paperlessStyle
+        svg.style += sampleStyle(data.stripped)
+        svg.style += paperlessStyle(data.stripped)
         svg.style += buildStylesheet(svg.pattern.settings.scale, data.stripped)
         let paperless = false
         for (const set of svg.pattern.settings) {
@@ -37,22 +37,26 @@ export const plugin = {
         }
         if (paperless) {
           svg.pattern.settings[0].units === 'imperial'
-            ? (svg.defs += grid.imperial)
-            : (svg.defs += grid.metric)
-          for (const key in svg.pattern.parts[0]) {
-            const part = svg.pattern.parts[key]
-            if (!part.hidden && svg.pattern.__needs(key)) {
-              let anchor = new svg.pattern.Point(0, 0)
-              if (typeof part.points.gridAnchor !== 'undefined') anchor = part.points.gridAnchor
-              else if (typeof part.points.anchor !== 'undefined') anchor = part.points.anchor
-              svg.defs += `<pattern id="grid_${key}" `
-              svg.defs += `xlink:href="#grid" x="${anchor.x}" y="${anchor.y}">`
-              svg.defs += '</pattern>'
-              part.paths[part.getId()] = new svg.pattern.Path()
+            ? svg.defs.setIfUnset('grid', grid.imperial)
+            : svg.defs.setIfUnset('grid', grid.metric)
+          const parts = svg.pattern.parts[svg.pattern.activeSet]
+          const skipGrid = data.skipGrid || []
+          for (const key in parts) {
+            const part = parts[key]
+            if (!part.hidden && !skipGrid.includes(key) && svg.pattern.__needs(key)) {
+              const { Path, paths, getId, Point, points } = part.shorthand()
+              let anchor = new Point(0, 0)
+              if (typeof points.gridAnchor !== 'undefined') anchor = part.points.gridAnchor
+              else if (typeof points.anchor !== 'undefined') anchor = part.points.anchor
+              svg.defs.setIfUnset(
+                'grid_' + key,
+                `<pattern id="grid_${key}" xlink:href="#grid" x="${anchor.x}" y="${anchor.y}"></pattern>'`
+              )
+              paths[getId()] = new Path()
                 .move(part.topLeft)
-                .line(new svg.pattern.Point(part.topLeft.x, part.bottomRight.y))
+                .line(new Point(part.topLeft.x, part.bottomRight.y))
                 .line(part.bottomRight)
-                .line(new svg.pattern.Point(part.bottomRight.x, part.topLeft.y))
+                .line(new Point(part.bottomRight.x, part.topLeft.y))
                 .close()
                 .attr('class', 'grid')
                 .attr('style', `fill: url(#grid_${key})`)

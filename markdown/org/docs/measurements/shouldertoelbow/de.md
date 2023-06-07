@@ -4,4 +4,4 @@ title: Schulter bis Ellenbogen
 
 Das **Schulter bis Ellenbogen**-Maß läuft von der Kante deiner Schulter bis zum Ellenbogen.
 
-Um den Abstand von der **Schulter zum Ellenbogen**zu messen, beginne am Schulterrand, wo der Ärmel bei einem passenden Hemd beginnt. Folge deinem Arm zu deinem Ellenbogen.
+To measure your **shoulder to elbow**, start at the tip of your shoulder, the tip or corner of the protruding bone that is located where the top of the shoulder meets the side of the arm. It is also where the top of the shoulder seam sits and the sleeve begins on a well-fitting dress shirt. Follow your arm down to your elbow.

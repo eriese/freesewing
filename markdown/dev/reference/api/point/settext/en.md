@@ -10,7 +10,7 @@ text](/howtos/code/adding-text) for more details.
 
 ```js
 Point point.setText(
-  string text, 
+  string text,
   string className
 )
 ```
@@ -19,7 +19,7 @@ Point point.setText(
 
 ## Example
 
-<Example caption="Examples of Point.setText(), compare this to [Point.setText](/reference/api/point/settext)">
+<Example caption="Examples of Point.setText(), compare this to [Point.setText()](/reference/api/point/settext)">
 ```js
 ({ Point, points, Path, paths, part }) => {
 

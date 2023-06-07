@@ -11,6 +11,7 @@ import {
   splitCurve,
   beamIntersectsX,
   beamIntersectsY,
+  beamIntersectsCurve,
   units,
   lineIntersectsCurve,
   curveIntersectsX,
@@ -69,6 +70,42 @@ describe('Utils', () => {
     let X = beamsIntersect(a, b, c, d)
     expect(round(X.x)).to.equal(7.14)
     expect(round(X.y)).to.equal(40)
+  })
+  it('Should find no intersections between a curve and a beam', () => {
+    let A = new Point(10, 10)
+    let Acp = new Point(10, 30)
+    let B = new Point(110, 10)
+    let Bcp = new Point(110, 30)
+    let E = new Point(10, 40)
+    let D = new Point(20, 40)
+
+    let hit = beamIntersectsCurve(E, D, A, Acp, Bcp, B)
+    expect(hit).to.equal(false)
+  })
+
+  it('Should find one intersections between a curve and a beam', () => {
+    let A = new Point(10, 10)
+    let Acp = new Point(10, 30)
+    let B = new Point(110, 10)
+    let Bcp = new Point(110, 30)
+    let E = new Point(50, 14)
+    let D = new Point(55, 16)
+
+    let hit = beamIntersectsCurve(E, D, A, Acp, Bcp, B)
+    expect(round(hit.x)).to.equal(75.79)
+    expect(round(hit.y)).to.equal(24.31)
+  })
+
+  it('Should find two intersections between a curve and a beam', () => {
+    let A = new Point(10, 10)
+    let Acp = new Point(10, 30)
+    let B = new Point(110, 10)
+    let Bcp = new Point(110, 30)
+    let E = new Point(0, 14)
+    let D = new Point(5, 15)
+
+    let hits = beamIntersectsCurve(E, D, A, Acp, Bcp, B)
+    expect(hits.length).to.equal(2)
   })
 
   it("Should return false when two lines don't intersect", () => {
@@ -154,47 +191,49 @@ describe('Utils', () => {
     expect(hits.length).to.equal(3)
   })
 
-  it('Should find 9 intersections between two curves', () => {
-    let A = new Point(10, 10)
-    let Acp = new Point(310, 40)
-    let B = new Point(110, 70)
-    let Bcp = new Point(-210, 40)
-    let C = new Point(20, -5)
-    let Ccp = new Point(60, 300)
-    let D = new Point(100, 85)
-    let Dcp = new Point(70, -220)
+  describe('curvesIntersect', function () {
+    it('Should find 9 intersections between two curves', () => {
+      let A = new Point(10, 10)
+      let Acp = new Point(310, 40)
+      let B = new Point(110, 70)
+      let Bcp = new Point(-210, 40)
+      let C = new Point(20, -5)
+      let Ccp = new Point(60, 300)
+      let D = new Point(100, 85)
+      let Dcp = new Point(70, -220)
 
-    let hits = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
-    expect(hits.length).to.equal(9)
-  })
+      let hits = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
+      expect(hits.length).to.equal(9)
+    })
 
-  it('Should find 1 intersection between two curves', () => {
-    let A = new Point(10, 10)
-    let Acp = new Point(310, 40)
-    let B = new Point(110, 70)
-    let Bcp = new Point(-210, 40)
-    let C = new Point(20, -5)
-    let Ccp = new Point(-60, 300)
-    let D = new Point(-200, 85)
-    let Dcp = new Point(-270, -220)
+    it('Should find 1 intersection between two curves', () => {
+      let A = new Point(10, 10)
+      let Acp = new Point(310, 40)
+      let B = new Point(110, 70)
+      let Bcp = new Point(-210, 40)
+      let C = new Point(20, -5)
+      let Ccp = new Point(-60, 300)
+      let D = new Point(-200, 85)
+      let Dcp = new Point(-270, -220)
 
-    let hit = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
-    expect(round(hit.x)).to.equal(15.58)
-    expect(round(hit.y)).to.equal(10.56)
-  })
+      let hit = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
+      expect(round(hit.x)).to.equal(15.58)
+      expect(round(hit.y)).to.equal(10.56)
+    })
 
-  it('Should find no intersection between two curves', () => {
-    let A = new Point(10, 10)
-    let Acp = new Point(310, 40)
-    let B = new Point(110, 70)
-    let Bcp = new Point(-210, 40)
-    let C = new Point(20, -5)
-    let Ccp = new Point(-60, -300)
-    let D = new Point(-200, 85)
-    let Dcp = new Point(-270, -220)
+    it('Should find no intersection between two curves', () => {
+      let A = new Point(10, 10)
+      let Acp = new Point(310, 40)
+      let B = new Point(110, 70)
+      let Bcp = new Point(-210, 40)
+      let C = new Point(20, -5)
+      let Ccp = new Point(-60, -300)
+      let D = new Point(-200, 85)
+      let Dcp = new Point(-270, -220)
 
-    let hit = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
-    expect(hit).to.equal(false)
+      let hit = curvesIntersect(A, Acp, Bcp, B, C, Ccp, Dcp, D)
+      expect(hit).to.equal(false)
+    })
   })
 
   it('Should correctly format units', () => {
@@ -490,6 +529,6 @@ describe('Utils', () => {
     const pattern = new design()
     const props = pattern.draft().getRenderProps()
     const transform = generateStackTransform(30, 60, 90, true, true, props.stacks.test)
-    expect(transform.transform).to.equal('translate(51 138) scale(-1 -1) rotate(90 10.5 39)')
+    expect(transform.join(' ')).to.equal('translate(51, 138) scale(-1, -1) rotate(90, 10.5, 39)')
   })
 })
