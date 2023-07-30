@@ -248,11 +248,12 @@ dev:
     'rehype-slug': &rehypeSlug '5.1.0'
     'rehype-stringify': &rehypeStringify '9.0.3'
     # see: https://github.com/npm/cli/issues/2610#issuecomment-1295371753
-    'remark-copy-linked-files': &remarkCopyLinkedFiles 'git+https://git@github.com/joostdecock/remark-copy-linked-files'
+    'remark-copy-linked-files': &remarkCopyLinkedFiles 'https://github.com/joostdecock/remark-copy-linked-files'
     'remark-gfm': &remarkGfm '3.0.1'
   dev: &nextSiteDevDependencies
     '@playwright/test': '^1.32.3'
     'autoprefixer': '10.4.14'
+    'eslint': *eslint
     'eslint-config-next': *next
     'js-yaml': &jsYaml '4.1.0'
     'postcss': &postcss '8.4.27'
@@ -283,6 +284,7 @@ lab:
     'next-i18next': &nextI18next '14.0.0'
     'react': *react
     'react-copy-to-clipboard': *reactCopyToClipboard
+    'react-dom': *react
     'react-hotkeys-hook': *reactHotkeysHook
     'react-i18next': &reactI18next '13.0.2'
     'react-instantsearch-dom': *reactInstantsearchDom
@@ -322,6 +324,8 @@ org:
     'lodash.set': *_set
     'luxon': '3.3.0'
     'next': *next
+    'react': *react
+    'react-dom': *react
     'react-dropzone': '14.2.3'
     'react-hotkeys-hook': *reactHotkeysHook
     'react-instantsearch-dom': *reactInstantsearchDom
@@ -398,7 +402,7 @@ shared:
     'remark-smartypants': '2.0.0'
     'sharp': '0.32.4'
     # see: https://github.com/npm/cli/issues/2610#issuecomment-1295371753
-    'svg-to-pdfkit': 'https://git@github.com/eriese/SVG-to-PDFKit'
+    'svg-to-pdfkit': 'https://github.com/eriese/SVG-to-PDFKit'
     'tlds': '1.240.0'
     'to-vfile': '8.0.0'
     'unist-util-visit': *unist-util-visit

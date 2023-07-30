@@ -90,8 +90,12 @@ export
 prebuild/*.json
 
 # Yarn
-.yarn
-.yarnrc
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # NextJS
 .next

@@ -50,8 +50,8 @@
   },
   "peerDependencies": {
     "@freesewing/core": "3.0.0-alpha.10",
-    "@freesewing/plugin-bundle": "3.0.0-alpha.10",
     "@freesewing/plugin-annotations": "3.0.0-alpha.10",
+    "@freesewing/plugin-bundle": "3.0.0-alpha.10",
     "@freesewing/plugin-bust": "3.0.0-alpha.10",
     "@freesewing/plugin-flip": "3.0.0-alpha.10",
     "@freesewing/plugin-gore": "3.0.0-alpha.10",
@@ -63,12 +63,11 @@
     "@freesewing/plugin-svgattr": "3.0.0-alpha.10",
     "@freesewing/plugin-theme": "3.0.0-alpha.10"
   },
-  "dependencies": {},
   "devDependencies": {
-    "mocha": "10.2.0",
-    "chai": "4.3.7",
     "@freesewing/models": "3.0.0-alpha.10",
-    "@freesewing/plugin-timing": "3.0.0-alpha.10"
+    "@freesewing/plugin-timing": "3.0.0-alpha.10",
+    "chai": "4.3.7",
+    "mocha": "10.2.0"
   },
   "files": [
     "dist/*",

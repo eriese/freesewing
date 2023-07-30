@@ -27,7 +27,6 @@
     "wbuild": "next build",
     "prewbuild": "node --conditions=internal --experimental-json-modules ./prebuild.mjs"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@mdx-js/loader": "2.3.0",
     "@mdx-js/mdx": "2.3.0",
@@ -55,16 +54,17 @@
     "rehype-sanitize": "5.0.1",
     "rehype-slug": "5.1.0",
     "rehype-stringify": "9.0.3",
-    "remark-copy-linked-files": "git+https://git@github.com/joostdecock/remark-copy-linked-files",
+    "remark-copy-linked-files": "https://github.com/joostdecock/remark-copy-linked-files",
     "remark-gfm": "3.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.32.3",
     "autoprefixer": "10.4.14",
+    "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "js-yaml": "4.1.0",
-    "postcss": "8.4.27",
     "playwright": "^1.32.3",
+    "postcss": "8.4.27",
     "remark-extract-frontmatter": "3.2.0",
     "remark-mdx-frontmatter": "3.0.0",
     "tailwindcss": "3.3.3",
