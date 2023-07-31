@@ -1,4 +1,3 @@
-import { execa } from 'execa'
 import { exec } from 'node:child_process'
 import { gitToAuthor, authors as authorInfo } from '../../../config/authors.mjs'
 import path from 'path'
@@ -22,13 +21,17 @@ const fileToSlug = (file, site, lang) =>
 export const getGitMetadata = async (file, site) => {
   const slug = fileToSlug(file, site, 'en')
   if (!slug) console.log({ file, slug })
-  const log = await execa(`git log --pretty="format:%cs${divider}%aN${divider}%aE" ${file}`, {
-    shell: true,
-  })
+  const logger = await exec(`git log --pretty="format:%cs${divider}%aN${divider}%aE" ${file}`)
+
+  /*
+   * Stdout is buffered, so we need to gather all of it
+   */
+  let log = ''
+  for await (const data of logger.stdout) log += data
 
   const authors = new Set()
   let lastUpdated = false
-  for (const line of log.stdout.split('\n')) {
+  for (const line of log.split('\n')) {
     const [date, author, email] = parseLog(line)
     if (!lastUpdated) lastUpdated = date.split('-').join('')
     let key = false
