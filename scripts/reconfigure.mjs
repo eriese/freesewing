@@ -252,11 +252,17 @@ function dependencies(section, pkg) {
     typeof repo.dependencies._types[pkg.type][section] !== 'undefined'
   )
     dependencies = repo.dependencies._types[pkg.type][section]
-  if (typeof repo.dependencies[pkg.name] === 'undefined') return dependencies
-  if (typeof repo.dependencies[pkg.name][section] !== 'undefined')
-    return { ...dependencies, ...repo.dependencies[pkg.name][section] }
+  if (typeof repo.dependencies[pkg.name]?.[section] !== 'undefined')
+    dependencies = { ...dependencies, ...repo.dependencies[pkg.name][section] }
 
-  return dependencies
+  const keys = Object.keys(dependencies)
+
+  return keys.length
+    ? keys.sort().reduce((sorted, key) => {
+        sorted[key] = dependencies[key]
+        return sorted
+      }, {})
+    : undefined
 }
 
 /**

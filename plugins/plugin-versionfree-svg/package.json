@@ -51,10 +51,9 @@
   "peerDependencies": {
     "@freesewing/core": "3.0.0-alpha.10"
   },
-  "dependencies": {},
   "devDependencies": {
-    "mocha": "10.2.0",
-    "chai": "4.3.7"
+    "chai": "4.3.7",
+    "mocha": "10.2.0"
   },
   "files": [
     "dist/*",

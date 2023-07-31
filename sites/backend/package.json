@@ -28,7 +28,6 @@
     "wbuild": "node build.mjs",
     "prewbuild": "node scripts/prebuild.mjs"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@aws-sdk/client-sesv2": "3.377.0",
     "@prisma/client": "5.0.0",

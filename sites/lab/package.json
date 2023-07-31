@@ -26,7 +26,6 @@
     "wbuild": "yarn prebuild && next build",
     "prewbuild": "node --conditions=internal --experimental-json-modules ./prebuild.mjs"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@headlessui/react": "1.7.15",
     "@mdx-js/loader": "2.3.0",
@@ -69,8 +68,8 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "js-yaml": "4.1.0",
-    "postcss": "8.4.27",
     "playwright": "^1.32.3",
+    "postcss": "8.4.27",
     "remark-extract-frontmatter": "3.2.0",
     "remark-mdx-frontmatter": "3.0.0",
     "tailwindcss": "3.3.3",
