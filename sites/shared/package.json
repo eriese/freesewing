@@ -13,6 +13,8 @@
     "type": "individual",
     "url": "https://freesewing.org/patrons/join"
   },
+  "scripts": {},
+  "peerDependencies": {},
   "dependencies": {
     "@headlessui/react": "1.7.15",
     "@next/mdx": "13.4.12",
@@ -26,15 +28,15 @@
     "feed": "4.2.2",
     "file-saver": "2.0.5",
     "front-matter": "4.0.2",
-    "github-slugger": "2.0.0",
     "highlight.js": "11.8.0",
+    "github-slugger": "2.0.0",
     "jotai": "2.2.2",
     "jotai-location": "0.5.1",
     "lodash.clonedeep": "4.5.0",
     "lodash.debounce": "^4.0.8",
-    "lodash.get": "4.4.2",
     "lodash.orderby": "4.6.0",
     "lodash.unset": "4.5.2",
+    "lodash.get": "4.4.2",
     "mdast-util-toc": "7.0.0",
     "mermaid": "10.2.4",
     "ora": "6.3.1",
@@ -59,8 +61,8 @@
     "web-worker": "1.2.0"
   },
   "devDependencies": {
-    "html-to-text": "^9.0.5",
-    "recursive-readdir": "^2.2.3"
+    "recursive-readdir": "^2.2.3",
+    "html-to-text": "^9.0.5"
   },
   "engines": {
     "node": "18",

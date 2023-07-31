@@ -39,10 +39,12 @@
     "wbuild": "node build.mjs",
     "wbuild:all": "yarn wbuild"
   },
+  "peerDependencies": {},
   "dependencies": {
-    "hast-util-from-html": "1.0.2",
-    "unist-util-visit": "5.0.0"
+    "unist-util-visit": "5.0.0",
+    "hast-util-from-html": "1.0.2"
   },
+  "devDependencies": {},
   "files": [
     "dist/*",
     "README.md"

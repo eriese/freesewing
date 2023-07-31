@@ -64,7 +64,7 @@ backend:
   prebuild: 'node scripts/prebuild.mjs'
 
 dev:
-  build: &nextBuild 'next build'
+  build: &nextBuild 'yarn prebuild && next build'
   cibuild: 'yarn build && node scripts/algolia.mjs'
   clean: &nextClean 'rimraf prebuild/* && rimraf public/locales/*/* && rimraf public/feeds/* && rimraf ../shared/prebuild/data/*'
   dev: &nextDev 'next dev -p 8000'
