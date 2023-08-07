@@ -13,19 +13,17 @@ const closedClasses = `border-r-0 border-t-0 border-b-0 hover:cursor-pointer hov
 const openClasses = `border-l-0 border-r-0 border-b-2 lg:border lg:rounded-lg border-primary`
 
 export const SampleItem = ({ name, passProps, t, updateFunc }) => {
-  const input = useRef(null)
   const checked = passProps.settings.sample?.[passProps.type] === name
   const onChange = (evt) => {
     if (evt.target.checked) updateFunc([name], true)
   }
 
   return (
-    <div
+    <label
       className={`collapse my-2 shadow border-solid border-l-[6px] min-h-10 rounded-none w-full
          ${checked ? openClasses : closedClasses}`}
     >
       <input
-        ref={input}
         type="radio"
         name="test-item"
         onChange={onChange}
@@ -38,7 +36,7 @@ export const SampleItem = ({ name, passProps, t, updateFunc }) => {
         }`}
       >
         <input
-          ref={input}
+          tabindex="-1"
           type="radio"
           checked={checked}
           className="radio checked:radio-primary radio-secondary mr-2 radio-sm"
@@ -51,7 +49,7 @@ export const SampleItem = ({ name, passProps, t, updateFunc }) => {
           <p>{t(name + '.d', '')}</p>
         </div>
       )}
-    </div>
+    </label>
   )
 }
 

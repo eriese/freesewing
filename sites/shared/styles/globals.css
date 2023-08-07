@@ -442,6 +442,7 @@
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
 /* Override DaisyUI button text color */
 .btn-info {
   color: var(--btn-info-content);

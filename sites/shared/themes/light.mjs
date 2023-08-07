@@ -15,7 +15,7 @@
  * For a full list, see: https://tailwindcss.com/docs/customizing-colors
  */
 import colors from 'tailwindcss/colors'
-const primary = colors.purple['900']
+const primary = colors.purple['950']
 
 // const rainbow = [
 //   colors.red['300'],
@@ -91,23 +91,23 @@ export const theme = {
   // primary: The main brand color and color of the primary button
   primary,
   // primary-focus: The :hover color for the primary button
-  'primary-focus': colors.purple['800'],
+  'primary-focus': colors.purple['700'],
   // primary-content: The text color on a primary button
   'primary-content': colors.neutral['50'],
 
   // secondary: The link color on default backgrounds (base-100)
-  secondary: colors.indigo['800'],
+  secondary: colors.indigo['900'],
   // secondary-focus: The :hover link color for default backgrounds. Or:
   // secondary-focus: An alternative link color for on dark backgrounds
-  'secondary-focus': colors.indigo['950'],
+  'secondary-focus': colors.indigo['700'],
   // secondary-content: The text color on a secondary button
   'secondary-content': colors.neutral['50'],
 
   // accent: The accent color is used to highlight active things
   // Should be something is positive/neutral. Avoid red or orange.
-  accent: colors.pink['800'],
+  accent: colors.pink['900'],
   // accent-focus: The :hover color for the accent button
-  'accent-focus': colors.pink['950'],
+  'accent-focus': colors.pink['700'],
   // accent-content: The text color for the accent button
   'accent-content': colors.neutral['50'],
 
